@@ -6,7 +6,7 @@
 /*   By: apetitco <apetitco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 15:05:04 by apetitco          #+#    #+#             */
-/*   Updated: 2024/06/12 16:53:27 by apetitco         ###   ########.fr       */
+/*   Updated: 2024/06/12 17:43:40 by apetitco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,18 @@
 #include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include <X11/keysym.h>
 #include <X11/X.h>
+
+typedef struct s_map
+{
+	char 	**map;
+	void	*object;
+	int		x;
+	int 	y;
+	int 	collectibles;
+}				t_map;
 
 typedef struct s_texture
 {
@@ -31,7 +41,9 @@ typedef struct s_data
 {
 	void		*mlx_ptr;
 	void		*win_ptr;
+	t_map		*map;
 	t_texture	textures[5];
+
 }				t_data;
 
 void	ft_test_map(const char *filename);
