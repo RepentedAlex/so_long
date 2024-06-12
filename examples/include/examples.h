@@ -6,7 +6,7 @@
 /*   By: apetitco <apetitco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 15:05:04 by apetitco          #+#    #+#             */
-/*   Updated: 2024/06/12 16:45:31 by apetitco         ###   ########.fr       */
+/*   Updated: 2024/06/12 16:53:27 by apetitco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define EXAMPLES_H
 
 #include "../../extras/minilibx-linux/mlx.h"
+#include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <X11/keysym.h>
@@ -33,6 +34,7 @@ typedef struct s_data
 	t_texture	textures[5];
 }				t_data;
 
-int	ft_test_displaying(void);
+void	ft_test_map(const char *filename);
+int		ft_test_displaying(void);
 
 #endif

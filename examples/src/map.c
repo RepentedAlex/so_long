@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   examples.c                                         :+:      :+:    :+:   */
+/*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apetitco <apetitco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/12 15:03:16 by apetitco          #+#    #+#             */
-/*   Updated: 2024/06/12 17:07:24 by apetitco         ###   ########.fr       */
+/*   Created: 2024/06/12 16:52:30 by apetitco          #+#    #+#             */
+/*   Updated: 2024/06/12 17:30:48 by apetitco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/examples.h"
 #include <string.h>
 
-int	main(int argc, char *argv[])
+int	ft_check_map_exists(int *fd, const char *filename)
 {
-	(void)argc;
-	if (!strcmp(argv[1], "display"))
-		return (ft_test_displaying(), 0);
-	if (!strcmp(argv[1], "map"))
-		return (ft_test_map(argv[2]), 0);
-	if (!strcmp(argv[1], "loop"))
-		return (0);
-	if (!strcmp(argv[1], "data"))
-		return (0);
+	*fd = 0;
+	*fd = open(filename, O_RDONLY);
+	if (*fd == -1)
+		return (printf("CPT mec :(((\n"), 2345);
+	printf("Map loaded successfully!\n");
+	return (0);
+}
+
+void	ft_test_map(const char *filename)
+{
+	int	fd;
+
+	ft_check_map_exists(&fd, filename);
 }
