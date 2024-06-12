@@ -18,11 +18,13 @@ WHITE = \033[0;97m
 
 NAME	=	examples
 CC		=	gcc
-IFLAGS	=	-I../include -Iinclude
-LFLAGS	=	-L../libs -lmlx -lmlx_Linux
+IFLAGS	=	-I../include -Iinclude -I/usr/include -Imlx
+LFLAGS	=	-L../libs -lmlx -lmlx_Linux -Lmlx -lmlx -L/usr/lib/X11 -lXext -lX11
 FFLAGS	=	-fsanitize=address
 WFLAGS	=	-Wall -Wextra -Werror -g3
-CFLAGS	=	$(WFLAGS) $(LFLAGS) $(IFLAGS) $(FFLAGS)
+CFLAGS	=	$(WFLAGS)
+CFLAGS	+=	$(IFLAGS)
+#CFLAGS	+=	$(FFLAGS)
 SRC_DIR	=	src/
 BLD_DIR	=	build/
 
@@ -30,7 +32,8 @@ BLD_DIR	=	build/
 ## SOURCES ##
 #############
 
-SRC_FILES	=	display
+SRC_FILES	=	display \
+				examples
 SRC			=	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJ			=	$(addprefix $(BLD_DIR), $(addsuffix .o, $(SRC_FILES)))
 OBJF		=	.cache_exists
@@ -42,7 +45,7 @@ OBJF		=	.cache_exists
 all:	$(NAME)
 
 $(NAME):	$(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LFLAGS)
 
 $(BLD_DIR)%.o:	$(SRC_DIR)%.c | $(OBJF)
 	echo "$(YELLOW)Compiling: $<$(DEF_COLOR)"

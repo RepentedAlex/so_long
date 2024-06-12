@@ -10,7 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_SO_LONG_H
-#define SO_LONG_SO_LONG_H
+#ifndef SO_LONG_H
+#define SO_LONG_H
 
-#endif //SO_LONG_SO_LONG_H
+#include "../extras/minilibx-linux/mlx.h"
+#include <stdlib.h>
+#include <stdio.h>
+
+#endif

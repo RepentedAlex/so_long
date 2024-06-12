@@ -10,9 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../include/examples.h"
 
 int	main(int argc, char *argv[])
 {
-
+	(void)argv;
+	if (argc == 2)
+		return (ft_test_displaying());
 }
