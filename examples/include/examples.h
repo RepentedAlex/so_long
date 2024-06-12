@@ -6,7 +6,7 @@
 /*   By: apetitco <apetitco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 15:05:04 by apetitco          #+#    #+#             */
-/*   Updated: 2024/06/12 15:58:08 by apetitco         ###   ########.fr       */
+/*   Updated: 2024/06/12 16:45:31 by apetitco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,18 @@
 #include <X11/keysym.h>
 #include <X11/X.h>
 
+typedef struct s_texture
+{
+	void	*image;
+	int 	width;
+	int 	height;
+}				t_texture;
+
 typedef struct s_data
 {
-	void	*mlx_ptr;
-	void	*win_ptr;
-	void	*textures[5];
+	void		*mlx_ptr;
+	void		*win_ptr;
+	t_texture	textures[5];
 }				t_data;
 
 int	ft_test_displaying(void);
