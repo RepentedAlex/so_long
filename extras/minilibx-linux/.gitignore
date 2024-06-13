@@ -24,7 +24,7 @@ Makefile.gen
 
 # Linker output
 *.ilk
-*.map
+*.map_array
 *.exp
 
 # Precompiled Headers

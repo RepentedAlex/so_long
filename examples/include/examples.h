@@ -23,7 +23,7 @@
 
 typedef struct s_map
 {
-	char 	**map;
+	char 	**map_array;
 	void	*object;
 	int		x;
 	int 	y;

@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   examples.c                                         :+:      :+:    :+:   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apetitco <apetitco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/12 15:03:16 by apetitco          #+#    #+#             */
-/*   Updated: 2024/06/12 17:07:24 by apetitco         ###   ########.fr       */
+/*   Created: 2023/11/07 19:54:05 by apetitco          #+#    #+#             */
+/*   Updated: 2024/04/23 17:32:59 by apetitco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/examples.h"
-#include "../../extras/Libft/include/libft.h"
-#include <string.h>
+#include "libft.h"
 
-int	main(int argc, char *argv[])
+/**
+ * Checks if the given character is alphanumeric.
+ *
+ * An alphanumeric character is either an uppercase letter, lowercase letter,
+ * or a digit.
+ *
+ * @param c The character to be checked.
+ * @return 1 if the character is alphanumeric, 0 otherwise.
+ */
+int	ft_isalnum(int c)
 {
-	(void)argc;
-	if (!strcmp(argv[1], "display"))
-		return (ft_test_displaying(), 0);
-	if (!strcmp(argv[1], "map"))
-		return (ft_test_map(argv[2]), 0);
-	if (!strcmp(argv[1], "loop"))
-		return (0);
-	if (!strcmp(argv[1], "data"))
+	if (ft_isalpha(c) || ft_isdigit(c))
+		return (1);
+	else
 		return (0);
 }

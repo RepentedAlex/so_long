@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../include/examples.h"
+#include "../../extras/Libft/include/libft.h"
 
 void	ft_free_textures(t_data *data)
 {

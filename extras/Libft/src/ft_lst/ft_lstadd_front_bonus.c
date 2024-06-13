@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   examples.c                                         :+:      :+:    :+:   */
+/*   ft_lstadd_front_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apetitco <apetitco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/12 15:03:16 by apetitco          #+#    #+#             */
-/*   Updated: 2024/06/12 17:07:24 by apetitco         ###   ########.fr       */
+/*   Created: 2023/11/21 17:27:29 by apetitco          #+#    #+#             */
+/*   Updated: 2024/04/23 17:02:53 by apetitco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/examples.h"
-#include "../../extras/Libft/include/libft.h"
-#include <string.h>
+#include "libft.h"
 
-int	main(int argc, char *argv[])
+/**
+ * Adds a new element to the beginning of a linked list.
+ *
+ * @param lst The address of a pointer to the first node of the list.
+ * @param new The node to be added to the front of the list.
+ */
+void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	(void)argc;
-	if (!strcmp(argv[1], "display"))
-		return (ft_test_displaying(), 0);
-	if (!strcmp(argv[1], "map"))
-		return (ft_test_map(argv[2]), 0);
-	if (!strcmp(argv[1], "loop"))
-		return (0);
-	if (!strcmp(argv[1], "data"))
-		return (0);
+	new->next = *lst;
+	*lst = new;
 }

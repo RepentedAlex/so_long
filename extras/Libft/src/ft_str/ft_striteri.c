@@ -1,28 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   examples.c                                         :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apetitco <apetitco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/12 15:03:16 by apetitco          #+#    #+#             */
-/*   Updated: 2024/06/12 17:07:24 by apetitco         ###   ########.fr       */
+/*   Created: 2023/11/21 14:08:27 by apetitco          #+#    #+#             */
+/*   Updated: 2024/04/23 17:09:24 by apetitco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/examples.h"
-#include "../../extras/Libft/include/libft.h"
-#include <string.h>
+#include "libft.h"
 
-int	main(int argc, char *argv[])
+/**
+ * Applies the function `f` to each character of the string `s`,
+ * passing its index as the first argument.
+ *
+ * @param s The string to iterate over.
+ * @param f The function to apply to each character.
+ */
+void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
-	(void)argc;
-	if (!strcmp(argv[1], "display"))
-		return (ft_test_displaying(), 0);
-	if (!strcmp(argv[1], "map"))
-		return (ft_test_map(argv[2]), 0);
-	if (!strcmp(argv[1], "loop"))
-		return (0);
-	if (!strcmp(argv[1], "data"))
-		return (0);
+	unsigned int	i;
+
+	if (!s || !f)
+		return ;
+	i = 0;
+	while (s[i])
+	{
+		f(i, &s[i]);
+		i++;
+	}
+	return ;
 }

@@ -1,28 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   examples.c                                         :+:      :+:    :+:   */
+/*   ft_lstlast_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apetitco <apetitco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/12 15:03:16 by apetitco          #+#    #+#             */
-/*   Updated: 2024/06/12 17:07:24 by apetitco         ###   ########.fr       */
+/*   Created: 2023/11/21 17:33:37 by apetitco          #+#    #+#             */
+/*   Updated: 2024/04/23 17:03:37 by apetitco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/examples.h"
-#include "../../extras/Libft/include/libft.h"
-#include <string.h>
+#include "libft.h"
 
-int	main(int argc, char *argv[])
+/**
+ * Returns the last element of a linked list.
+ *
+ * @param lst The pointer to the head of the linked list.
+ * @return The pointer to the last element of the linked list.
+ */
+t_list	*ft_lstlast(t_list *lst)
 {
-	(void)argc;
-	if (!strcmp(argv[1], "display"))
-		return (ft_test_displaying(), 0);
-	if (!strcmp(argv[1], "map"))
-		return (ft_test_map(argv[2]), 0);
-	if (!strcmp(argv[1], "loop"))
-		return (0);
-	if (!strcmp(argv[1], "data"))
-		return (0);
+	t_list	*last_el;
+
+	last_el = lst;
+	if (lst == NULL)
+		return (NULL);
+	while (last_el->next != NULL)
+	{
+		last_el = last_el->next;
+	}
+	return (last_el);
 }

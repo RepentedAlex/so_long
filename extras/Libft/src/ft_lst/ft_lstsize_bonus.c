@@ -1,28 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   examples.c                                         :+:      :+:    :+:   */
+/*   ft_lstsize_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apetitco <apetitco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/12 15:03:16 by apetitco          #+#    #+#             */
-/*   Updated: 2024/06/12 17:07:24 by apetitco         ###   ########.fr       */
+/*   Created: 2023/11/21 17:32:58 by apetitco          #+#    #+#             */
+/*   Updated: 2024/04/23 17:05:04 by apetitco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/examples.h"
-#include "../../extras/Libft/include/libft.h"
-#include <string.h>
+#include "libft.h"
 
-int	main(int argc, char *argv[])
+/**
+ * Returns the number of elements in a linked list.
+ *
+ * @param lst - The pointer to the first node of the linked list.
+ * @return The number of elements in the linked list.
+ */
+int	ft_lstsize(t_list *lst)
 {
-	(void)argc;
-	if (!strcmp(argv[1], "display"))
-		return (ft_test_displaying(), 0);
-	if (!strcmp(argv[1], "map"))
-		return (ft_test_map(argv[2]), 0);
-	if (!strcmp(argv[1], "loop"))
+	int	size;
+
+	if (lst == NULL)
 		return (0);
-	if (!strcmp(argv[1], "data"))
-		return (0);
+	size = 0;
+	while (lst != NULL)
+	{
+		lst = lst->next;
+		size++;
+	}
+	return (size);
 }

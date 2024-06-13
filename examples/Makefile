@@ -19,7 +19,7 @@ WHITE = \033[0;97m
 NAME	=	examples
 CC		=	gcc
 IFLAGS	=	-I../include -Iinclude -I/usr/include -Imlx
-LFLAGS	=	-L../libs -lmlx -lmlx_Linux -Lmlx -lmlx -L/usr/lib/X11 -lXext -lX11
+LFLAGS	=	-L../libs -lmlx -lmlx_Linux -lft -Lmlx -lmlx -L/usr/lib/X11 -lXext -lX11
 FFLAGS	=	-fsanitize=address
 WFLAGS	=	-Wall -Wextra -Werror -g3
 CFLAGS	=	$(WFLAGS)
