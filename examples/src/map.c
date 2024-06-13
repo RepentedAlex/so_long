@@ -13,7 +13,6 @@
 
 #include "../include/examples.h"
 #include "../../extras/Libft/include/libft.h"
-#include <stdbool.h>
 
 static bool	ft_check_sides(t_map *map)
 {
@@ -35,14 +34,14 @@ static bool	ft_check_sides(t_map *map)
 	return (true);
 }
 
-static bool	ft_check_wall_line(char *line, char c)
+static bool ft_check_wall_line(const char *line)
 {
 	int i;
 
 	i = 0;
-	while (line[i] && line[i] == c)
+	while (line[i] && line[i] == '1')
 	{
-		if (line[i] != c)
+		if (line[i] != '1')
 			return (false);
 		i++;
 	}
@@ -66,7 +65,7 @@ static bool	ft_check_top_bottom(t_map *map)
 
 	first = map->map_array[0];
 	last = ft_get_to_last_line(map);
-	if (ft_check_wall_line(first, '1') == false || ft_check_wall_line(last, '1') == false)
+	if (ft_check_wall_line(first) == false || ft_check_wall_line(last) == false)
 		return (false);
 	else
 		return (true);

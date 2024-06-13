@@ -15,6 +15,7 @@
 
 #include "../../extras/minilibx-linux/mlx.h"
 #include <fcntl.h>
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -46,6 +47,7 @@ typedef struct s_data
 
 }				t_data;
 
+bool	ft_flood_fill(t_map *map);
 void	ft_test_map(const char *filename);
 int		ft_test_displaying(void);
 
