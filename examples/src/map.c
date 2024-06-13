@@ -5,31 +5,91 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: apetitco <apetitco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/13 16:36:27 by apetitco          #+#    #+#             */
-/*   Updated: 2024/06/13 17:58:17 by apetitco         ###   ########.fr       */
+/*   Created: 2024/06/13 18:24:11 by apetitco          #+#    #+#             */
+/*   Updated: 2024/06/13 18:24:11 by apetitco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   map_array.c                                              :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: apetitco <apetitco@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/12 16:52:30 by apetitco          #+#    #+#             */
-/*   Updated: 2024/06/13 16:30:28 by apetitco         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "../include/examples.h"
 #include "../../extras/Libft/include/libft.h"
 #include <stdbool.h>
 
+static bool	ft_check_sides(t_map *map)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (map->map_array[i])
+	{
+		if (map->map_array[i][0] != '1')
+			return (false);
+		j = 0;
+		while (map->map_array[i][j] && map->map_array[i][j + 1] != '\0')
+			j++;
+		if (map->map_array[i][j] != '1')
+			return (false);
+		i++;
+	}
+	return (true);
+}
+
+static bool	ft_check_wall_line(char *line, char c)
+{
+	int i;
+
+	i = 0;
+	while (line[i] && line[i] == c)
+	{
+		if (line[i] != c)
+			return (false);
+		i++;
+	}
+	return (true);
+}
+
+static char *ft_get_to_last_line(t_map *map)
+{
+	int i;
+
+	i = 0;
+	while (map->map_array[i + 1] != 0)
+		i++;
+	return map->map_array[i];
+}
+
+static bool	ft_check_top_bottom(t_map *map)
+{
+	char *first;
+	char *last;
+
+	first = map->map_array[0];
+	last = ft_get_to_last_line(map);
+	if (ft_check_wall_line(first, '1') == false || ft_check_wall_line(last, '1') == false)
+		return (false);
+	else
+		return (true);
+}
+
+bool	ft_check_if_map_is_enclosed(t_map *map)
+{
+	if (ft_check_top_bottom(map) == false || ft_check_sides(map) == false)
+	{
+		printf("Map is not enclosed by walls...\n");
+		return (false);
+	}
+	else
+	{
+		printf("Map is enclosed by walls!\n");
+		return (true);
+	}
+}
+
 /// \brief Checks if the provided map_array is correctly enclosed by walls.
 /// \param map The provided map_array to check.
 /// \return true if map_array is valid, 0 if invalid.
-bool	ft_check_borders(t_map *map)
+bool	ft_check_map_is_rectangular(t_map *map)
 {
 	int	n_line;
 	int n1_line;
@@ -97,7 +157,10 @@ void	ft_test_map(const char *filename)
 	ft_check_map_exists(&fd, filename);
 	ft_ber_to_array(fd, &map);
 	close(fd);
-	ft_check_borders(&map);
+	if (ft_check_map_is_rectangular(&map) == false)
+		return ;
+	if (ft_check_if_map_is_enclosed(&map) == false)
+		return ;
 	for (int i = 0; map.map_array[i] != 0; ++i)
 			free(map.map_array[i]);
 	free(map.map_array);
