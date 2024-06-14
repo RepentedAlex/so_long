@@ -15,19 +15,19 @@
 /**
  * Sets the first 'n' bytes of the memory area pointed to by 's' to zero.
  *
- * @param s - Pointer to the memory area to be zeroed.
+ * @param to_duplicate - Pointer to the memory area to be zeroed.
  * @param n - Number of bytes to be zeroed.
  */
-void	ft_bzero(void *s, size_t n)
+void	ft_bzero(void *to_duplicate, size_t n)
 {
 	size_t			i;
-	unsigned char	*p;
+	unsigned char	*temp;
 
-	p = s;
+	temp = to_duplicate;
 	i = 0;
 	while (i < n)
 	{
-		p[i] = '\0';
+		temp[i] = '\0';
 		i++;
 	}
 }

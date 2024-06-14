@@ -34,7 +34,8 @@ BLD_DIR	=	build/
 
 SRC_FILES	=	display \
 				examples \
-				map
+				map \
+				flood_fill
 SRC			=	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJ			=	$(addprefix $(BLD_DIR), $(addsuffix .o, $(SRC_FILES)))
 OBJF		=	.cache_exists

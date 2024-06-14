@@ -6,13 +6,49 @@
 /*   By: apetitco <apetitco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 18:24:11 by apetitco          #+#    #+#             */
-/*   Updated: 2024/06/13 18:24:11 by apetitco         ###   ########.fr       */
+/*   Updated: 2024/06/14 14:39:26 by apetitco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "../include/examples.h"
 #include "../../extras/Libft/include/libft.h"
+
+bool	ft_check_items(t_map *map)
+{
+	int collectibles_count;
+	int exit_count;
+	int player_count;
+	int i;
+	int j;
+
+	collectibles_count = 0;
+	exit_count = 0;
+	player_count = 0;
+	i = 0;
+	while (map->map_array[i])
+	{
+		j = 0;
+		while (map->map_array[i][j] != '\0')
+		{
+			if (map->map_array[i][j] == 'C')
+				collectibles_count++;
+			else if (map->map_array[i][j] == 'E' && exit_count == 0)
+				exit_count++;
+			else if (map->map_array[i][j] == 'P' && player_count == 0)
+				player_count++;
+			else if (map->map_array[i][j] != '0' && map->map_array[i][j] != '1')
+			{
+				printf("Invalid character detected, must EXTERMINATE\n");
+				return (false);
+			}
+					j++;
+		}
+		i++;
+	}
+	map->collectibles = collectibles_count;
+	return (true);
+}
 
 static bool	ft_check_sides(t_map *map)
 {
@@ -110,7 +146,13 @@ bool	ft_check_map_is_rectangular(t_map *map)
 		n_line ++;
 		n1_line ++;
 	}
+	map->x = i;
+	if (map->map_array[n1_line - 1] != NULL)
+		map->y = n1_line;
+	else
+		map->y = n_line;
 	printf("Map is rectangular!\n");
+	printf("Map width = %d ; Map height = %d\n", map->x, map->y);
 	return (true);
 }
 
@@ -160,7 +202,8 @@ void	ft_test_map(const char *filename)
 		return ;
 	if (ft_check_if_map_is_enclosed(&map) == false)
 		return ;
-	for (int i = 0; map.map_array[i] != 0; ++i)
-			free(map.map_array[i]);
-	free(map.map_array);
+	if (ft_check_items(&map) == false)
+		return ;
+	ft_flood_fill_handler(&map);
+	ft_free_map(&map);
 }
