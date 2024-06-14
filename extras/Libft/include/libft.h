@@ -49,7 +49,7 @@ size_t	ft_strlen(const char *str);
 t_list	*ft_lstlast(t_list *lst);
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 t_list	*ft_lstnew(void *content);
-void	ft_bzero(void *s, size_t n);
+void	ft_bzero(void *to_duplicate, size_t n);
 void	ft_lstadd_back(t_list **lst, t_list *new);
 void	ft_lstadd_front(t_list **lst, t_list *new);
 void	ft_lstclear(t_list **lst, void (*del)(void *));
