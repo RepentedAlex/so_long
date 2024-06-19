@@ -6,7 +6,7 @@
 /*   By: apetitco <apetitco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 18:24:11 by apetitco          #+#    #+#             */
-/*   Updated: 2024/06/14 14:39:26 by apetitco         ###   ########.fr       */
+/*   Updated: 2024/06/19 17:15:29 by apetitco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,37 +156,42 @@ bool	ft_check_map_is_rectangular(t_map *map)
 	return (true);
 }
 
-void	ft_ber_to_array(int fd, t_map *map)
+t_error	ft_ber_to_array(int fd, t_map *map)
 {
-	char		buff[BUFSIZ];
+	static char		buff[BUFFER_SIZE + 1];
 	char		*file;
 	ssize_t		br;
 
+	ft_bzero(buff, sizeof(buff));
 	file = ft_strdup("");
-	br = read(fd, buff, BUFSIZ);
+	br = read(fd, buff, BUFFER_SIZE);
 	if (br <= 0)
-		return ;
+		return (ERROR);
 	while (br > 0)
 	{
 		buff[br] = 0;
 		file = ft_strjoin(file, buff);
-		br = read(fd, buff, BUFSIZ);
+		br = read(fd, buff, BUFFER_SIZE);
 	}
 	if (br < 0)
-		return (free(file));
+		return (free(file), ERROR);
 	map->map_array = ft_split(file, '\n');
 	free(file);
 	printf("Map converted successfully!\n");
+	return (NO_ERROR);
 }
 
-int	ft_check_map_exists(int *fd, const char *filename)
+t_error	ft_check_map_exists(int *fd, const char *filename)
 {
-	*fd = 0;
-	*fd = open(filename, O_RDONLY);
-	if (*fd == -1)
-		return (printf("CPT mec :(((\n"), 2345);
+	int ret;
+
+	if (fd == NULL || filename == NULL)
+		return (ERROR);
+	ret = open(filename, O_RDONLY);
+	if (ret == -1)
+		return (printf("CPT mec :(((\n"), ERROR);
 	printf("Map loaded successfully!\n");
-	return (0);
+	return (*fd = ret, NO_ERROR);
 }
 
 void	ft_test_map(const char *filename)
@@ -195,15 +200,18 @@ void	ft_test_map(const char *filename)
 	t_map map;
 
 	ft_bzero(&map, sizeof(map));
-	ft_check_map_exists(&fd, filename);
-	ft_ber_to_array(fd, &map);
-	close(fd);
-	if (ft_check_map_is_rectangular(&map) == false)
+	if (ft_check_map_exists(&fd, filename))
 		return ;
-	if (ft_check_if_map_is_enclosed(&map) == false)
+	if (ft_ber_to_array(fd, &map))
+		return ((void)close(fd));
+	close(fd);
+	if (!ft_check_map_is_rectangular(&map))
+		return ;
+	if (!ft_check_if_map_is_enclosed(&map))
 		return ;
 	if (ft_check_items(&map) == false)
 		return ;
-	ft_flood_fill_handler(&map);
+	if (ft_flood_fill_handler(&map))
+		return ;
 	ft_free_map(&map);
 }
