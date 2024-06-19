@@ -14,7 +14,7 @@
 #include "../include/examples.h"
 #include "../../extras/Libft/include/libft.h"
 
-bool	ft_check_items(t_map *map)
+t_error	ft_check_items(t_map *map)
 {
 	int collectibles_count;
 	int exit_count;
@@ -40,17 +40,17 @@ bool	ft_check_items(t_map *map)
 			else if (map->map_array[i][j] != '0' && map->map_array[i][j] != '1')
 			{
 				printf("Invalid character detected, must EXTERMINATE\n");
-				return (false);
+				return (ERROR);
 			}
-					j++;
+			j++;
 		}
 		i++;
 	}
 	map->collectibles = collectibles_count;
-	return (true);
+	return (NO_ERROR);
 }
 
-static bool	ft_check_sides(t_map *map)
+static t_error	ft_check_sides(t_map *map)
 {
 	int i;
 	int j;
@@ -59,15 +59,15 @@ static bool	ft_check_sides(t_map *map)
 	while (map->map_array[i])
 	{
 		if (map->map_array[i][0] != '1')
-			return (false);
+			return (ERROR);
 		j = 0;
 		while (map->map_array[i][j] && map->map_array[i][j + 1] != '\0')
 			j++;
 		if (map->map_array[i][j] != '1')
-			return (false);
+			return (ERROR);
 		i++;
 	}
-	return (true);
+	return (NO_ERROR);
 }
 
 static bool ft_check_wall_line(const char *line)
@@ -78,10 +78,10 @@ static bool ft_check_wall_line(const char *line)
 	while (line[i] && line[i] == '1')
 	{
 		if (line[i] != '1')
-			return (false);
+			return (ERROR);
 		i++;
 	}
-	return (true);
+	return (NO_ERROR);
 }
 
 static char *ft_get_to_last_line(t_map *map)
@@ -94,37 +94,37 @@ static char *ft_get_to_last_line(t_map *map)
 	return map->map_array[i];
 }
 
-static bool	ft_check_top_bottom(t_map *map)
+static t_error	ft_check_top_bottom(t_map *map)
 {
 	char *first;
 	char *last;
 
 	first = map->map_array[0];
 	last = ft_get_to_last_line(map);
-	if (ft_check_wall_line(first) == false || ft_check_wall_line(last) == false)
-		return (false);
+	if (ft_check_wall_line(first) || ft_check_wall_line(last))
+		return (ERROR);
 	else
-		return (true);
+		return (NO_ERROR);
 }
 
-bool	ft_check_if_map_is_enclosed(t_map *map)
+t_error	ft_check_if_map_is_enclosed(t_map *map)
 {
-	if (ft_check_top_bottom(map) == false || ft_check_sides(map) == false)
+	if (ft_check_top_bottom(map) || ft_check_sides(map))
 	{
 		printf("Map is not enclosed by walls...\n");
-		return (false);
+		return (ERROR);
 	}
 	else
 	{
 		printf("Map is enclosed by walls!\n");
-		return (true);
+		return (NO_ERROR);
 	}
 }
 
 /// \brief Checks if the provided map_array is correctly enclosed by walls.
 /// \param map The provided map_array to check.
 /// \return true if map_array is valid, 0 if invalid.
-bool	ft_check_map_is_rectangular(t_map *map)
+t_error	ft_check_map_is_rectangular(t_map *map)
 {
 	int	n_line;
 	int n1_line;
@@ -142,7 +142,7 @@ bool	ft_check_map_is_rectangular(t_map *map)
 		while (map->map_array[n1_line][j] != 0)
 			j++;
 		if (i != j)
-			return (printf("Map isn't rectangular! :(\n"), false);
+			return (printf("Map isn't rectangular! :(\n"), ERROR);
 		n_line ++;
 		n1_line ++;
 	}
@@ -153,7 +153,7 @@ bool	ft_check_map_is_rectangular(t_map *map)
 		map->y = n_line;
 	printf("Map is rectangular!\n");
 	printf("Map width = %d ; Map height = %d\n", map->x, map->y);
-	return (true);
+	return (NO_ERROR);
 }
 
 t_error	ft_ber_to_array(int fd, t_map *map)
@@ -205,11 +205,11 @@ void	ft_test_map(const char *filename)
 	if (ft_ber_to_array(fd, &map))
 		return ((void)close(fd));
 	close(fd);
-	if (!ft_check_map_is_rectangular(&map))
+	if (ft_check_map_is_rectangular(&map))
 		return ;
-	if (!ft_check_if_map_is_enclosed(&map))
+	if (ft_check_if_map_is_enclosed(&map))
 		return ;
-	if (ft_check_items(&map) == false)
+	if (ft_check_items(&map))
 		return ;
 	if (ft_flood_fill_handler(&map))
 		return ;
