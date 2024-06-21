@@ -10,10 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "game.h"
 #include "libft.h"
+#include "so_long.h"
 
-t_error	ft_check_top_bottom(t_map *map)
+t_error	ft_check_top_bottom(t_map_data *map)
 {
 	char	*first;
 	char	*last;
@@ -39,7 +40,7 @@ t_error	ft_check_walls(const char *line)
 	return (NO_ERROR);
 }
 
-void	ft_free_map(t_map *map)
+void	ft_free_map(t_map_data *map)
 {
 	int	i;
 
@@ -53,7 +54,7 @@ void	ft_free_map(t_map *map)
 	free(map->map_array);
 }
 
-char	*ft_get_to_last_line(t_map *map)
+char	*ft_get_to_last_line(t_map_data *map)
 {
 	int	i;
 

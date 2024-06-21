@@ -10,10 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "game.h"
 #include "libft.h"
 #include "so_long.h"
 
-void	ft_find_player(t_map *map)
+void	ft_find_player(t_map_data *map)
 {
 	int	i;
 	int	j;
@@ -40,7 +41,7 @@ void	ft_find_player(t_map *map)
 	}
 }
 
-void	ft_flood_fill(t_map *map, int minotaur_x, int minotaur_y)
+void	ft_flood_fill(t_map_data *map, int minotaur_x, int minotaur_y)
 {
 	int	tmp;
 
@@ -58,7 +59,7 @@ void	ft_flood_fill(t_map *map, int minotaur_x, int minotaur_y)
 	ft_flood_fill(map, minotaur_x + 1, minotaur_y);
 }
 
-t_error	ft_flood_fill_handler(t_map *map)
+t_error	ft_flood_fill_handler(t_map_data *map)
 {
 	int	mino_x;
 	int	mino_y;

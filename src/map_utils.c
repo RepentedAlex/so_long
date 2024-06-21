@@ -10,10 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "game.h"
 #include "libft.h"
+#include "so_long.h"
 
-t_error	ft_ber_to_array(int fd, t_map *map)
+t_error	ft_ber_to_array(int fd, t_map_data *map)
 {
 	char	buffer[BUFFER_SIZE + 1];
 	char	*file;
@@ -45,7 +46,7 @@ t_error	ft_check_file_is_ber(const char *filename)
 	return (printf("File provided is correct (*.ber)!\n"), NO_ERROR);
 }
 
-t_error	ft_check_if_finishable(t_map *map)
+t_error	ft_check_if_finishable(t_map_data *map)
 {
 	int	i;
 	int	j;
@@ -74,7 +75,7 @@ t_error	ft_check_if_finishable(t_map *map)
 	return (printf("Map is completable!\n"), NO_ERROR);
 }
 
-t_error	ft_check_items(t_map *map)
+t_error	ft_check_items(t_map_data *map)
 {
 	int	collectibles_count;
 	int	exit_count;

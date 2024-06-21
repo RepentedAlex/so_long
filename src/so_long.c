@@ -10,10 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "game.h"
 #include "libft.h"
 #include "so_long.h"
 
-t_error	ft_map_initialisation(const char *filename, t_map *map)
+t_error	ft_map_initialisation(const char *filename, t_map_data *map)
 {
 	int	fd;
 
@@ -34,7 +35,7 @@ t_error	ft_map_initialisation(const char *filename, t_map *map)
 
 int	main(int argc, char *argv[])
 {
-	t_map	map;
+	t_map_data	map;
 
 	ft_bzero(&map, sizeof(map));
 	if (argc != 2)

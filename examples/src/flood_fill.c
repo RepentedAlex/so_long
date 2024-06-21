@@ -13,7 +13,7 @@
 #include "../include/examples.h"
 #include "../../extras/Libft/include/libft.h"
 
-static void	ft_find_player(t_map *map)
+static void	ft_find_player(t_map_data *map)
 {
 	int	i;
 	int j;
@@ -38,7 +38,7 @@ static void	ft_find_player(t_map *map)
 	}
 }
 
-void	ft_free_map(t_map *map)
+void	ft_free_map(t_map_data *map)
 {
 	int i;
 
@@ -52,7 +52,7 @@ void	ft_free_map(t_map *map)
 	free(map->map_array);
 }
 
-t_error	ft_flood_fill_handler(t_map *map)
+t_error	ft_flood_fill_handler(t_map_data *map)
 {
 	int mino_x;
 	int mino_y;
@@ -72,7 +72,7 @@ t_error	ft_flood_fill_handler(t_map *map)
  * @param x, y the coordinates
  * @param[out] out the
  */
-t_error get_char_in_map(t_map *map, int x, int y, char *out)
+t_error get_char_in_map(t_map_data *map, int x, int y, char *out)
 {
 	if (map == NULL || out == NULL)
 		return (ERROR);
@@ -82,7 +82,7 @@ t_error get_char_in_map(t_map *map, int x, int y, char *out)
 	return (NO_ERROR);
 }
 
-void ft_flood_fill(t_map *map, int minotaur_x, int minotaur_y)
+void ft_flood_fill(t_map_data *map, int minotaur_x, int minotaur_y)
 {
 	int tmp;
 
@@ -103,7 +103,7 @@ void ft_flood_fill(t_map *map, int minotaur_x, int minotaur_y)
  * collectibles
  * @param map The map's structure
  */
-t_error ft_check_if_finishable(t_map *map)
+t_error ft_check_if_finishable(t_map_data *map)
 {
 	int i;
 	int j;

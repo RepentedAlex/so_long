@@ -14,7 +14,7 @@
 #include "../include/examples.h"
 #include "../../extras/Libft/include/libft.h"
 
-t_error	ft_check_items_internal(t_map *map)
+t_error	ft_check_items_internal(t_map_data *map)
 {
 	int collectibles_count;
 	int exit_count;
@@ -50,7 +50,7 @@ t_error	ft_check_items_internal(t_map *map)
 	return (NO_ERROR);
 }
 
-static t_error	ft_check_sides(t_map *map)
+static t_error	ft_check_sides(t_map_data *map)
 {
 	int i;
 	int j;
@@ -84,7 +84,7 @@ static bool ft_check_wall_line(const char *line)
 	return (NO_ERROR);
 }
 
-static char *ft_get_to_last_line(t_map *map)
+static char *ft_get_to_last_line(t_map_data *map)
 {
 	int i;
 
@@ -94,7 +94,7 @@ static char *ft_get_to_last_line(t_map *map)
 	return map->map_array[i];
 }
 
-static t_error	ft_check_top_bottom(t_map *map)
+static t_error	ft_check_top_bottom(t_map_data *map)
 {
 	char *first;
 	char *last;
@@ -107,7 +107,7 @@ static t_error	ft_check_top_bottom(t_map *map)
 		return (NO_ERROR);
 }
 
-t_error	ft_check_if_map_is_enclosed(t_map *map)
+t_error	ft_check_if_map_is_enclosed(t_map_data *map)
 {
 	if (ft_check_top_bottom(map) || ft_check_sides(map))
 	{
@@ -124,7 +124,7 @@ t_error	ft_check_if_map_is_enclosed(t_map *map)
 /// \brief Checks if the provided map_array is correctly enclosed by walls.
 /// \param map The provided map_array to check.
 /// \return true if map_array is valid, 0 if invalid.
-t_error	ft_check_map_is_rectangular(t_map *map)
+t_error	ft_check_map_is_rectangular(t_map_data *map)
 {
 	int	n_line;
 	int n1_line;
@@ -156,7 +156,7 @@ t_error	ft_check_map_is_rectangular(t_map *map)
 	return (NO_ERROR);
 }
 
-t_error	ft_ber_to_array(int fd, t_map *map)
+t_error	ft_ber_to_array(int fd, t_map_data *map)
 {
 	static char		buff[BUFFER_SIZE + 1];
 	char		*file;
@@ -197,7 +197,7 @@ t_error	ft_check_map_exists(int *fd, const char *filename)
 void	ft_test_map(const char *filename)
 {
 	int	fd;
-	t_map map;
+	t_map_data map;
 
 	ft_bzero(&map, sizeof(map));
 	if (ft_check_map_exists(&fd, filename))

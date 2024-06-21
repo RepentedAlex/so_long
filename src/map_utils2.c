@@ -10,10 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "game.h"
 #include "so_long.h"
 #include "libft.h"
 
-t_error	ft_check_items_internal(t_map *map, int *c_count, int *e_count, \
+t_error	ft_check_items_internal(t_map_data *map, int *c_count, int *e_count, \
 int *p_count)
 {
 	int	i;
@@ -52,14 +53,14 @@ t_error	ft_check_map_exists(int *fd, const char *filename)
 	return (NO_ERROR);
 }
 
-t_error	ft_check_map_is_enclosed(t_map *map)
+t_error	ft_check_map_is_enclosed(t_map_data *map)
 {
 	if (ft_check_top_bottom(map) || ft_check_sides(map))
 		return (printf("Error: Map is not enclose by walls.\n"), ERROR);
 	return (printf("Map is enclosed by walls!\n"), NO_ERROR);
 }
 
-t_error	ft_check_map_is_rectangular(t_map *map)
+t_error	ft_check_map_is_rectangular(t_map_data *map)
 {
 	int	n_line;
 	int	n1_line;
@@ -88,7 +89,7 @@ t_error	ft_check_map_is_rectangular(t_map *map)
 	return (printf("Map is rectangular!\n"), NO_ERROR);
 }
 
-t_error	ft_check_sides(t_map *map)
+t_error	ft_check_sides(t_map_data *map)
 {
 	int	i;
 	int	j;
