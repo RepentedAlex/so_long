@@ -6,7 +6,7 @@
 /*   By: apetitco <apetitco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 18:35:38 by apetitco          #+#    #+#             */
-/*   Updated: 2024/06/19 18:50:49 by apetitco         ###   ########.fr       */
+/*   Updated: 2024/06/20 17:15:26 by apetitco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,12 @@ void ft_flood_fill(t_map *map, int minotaur_x, int minotaur_y)
 	ft_flood_fill(map, minotaur_x + 1, minotaur_y);
 }
 
+
+/*
+ * @brief Reset each char to absolute values if needed and check if flood fill got all collectibles and exit.
+ * collectibles
+ * @param map The map's structure
+ */
 t_error ft_check_if_finishable(t_map *map)
 {
 	int i;

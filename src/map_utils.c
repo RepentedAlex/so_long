@@ -13,7 +13,7 @@
 #include "so_long.h"
 #include "libft.h"
 
-t_error ft_ber_to_array(int fd, t_map *map)
+t_error	ft_ber_to_array(int fd, t_map *map)
 {
 	char	buffer[BUFFER_SIZE + 1];
 	char	*file;
@@ -38,9 +38,37 @@ t_error ft_ber_to_array(int fd, t_map *map)
 	return (NO_ERROR);
 }
 
+t_error	ft_check_items(t_map *map)
+{
+	int	collectibles_count;
+	int	exit_count;
+	int	player_count;
+	int	i;
+	int	j;
+
+	collectibles_count = 0;
+	exit_count = 0;
+	player_count = 0;
+	i = 0;
+	while (map->map_array[i])
+	{
+		j = 0;
+		while (map->map_array[i][j] != '\0')
+		{
+			if (ft_is_charset(map->map_array[i][j], &collectibles_count, \
+			&exit_count, &player_count))
+				return (ERROR);
+			j++;
+		}
+		i++;
+	}
+	map->collectibles = collectibles_count;
+	return (NO_ERROR);
+}
+
 t_error	ft_check_map_exists(int *fd, const char *filename)
 {
-	int ret;
+	int	ret;
 
 	if (filename == NULL)
 		return (ERROR);
@@ -52,7 +80,7 @@ t_error	ft_check_map_exists(int *fd, const char *filename)
 	return (NO_ERROR);
 }
 
-t_error ft_check_map_is_enclosed(t_map *map)
+t_error	ft_check_map_is_enclosed(t_map *map)
 {
 	if (ft_check_top_bottom(map) || ft_check_sides(map))
 		return (printf("Error: Map is not enclose by walls.\n"), ERROR);
@@ -61,10 +89,10 @@ t_error ft_check_map_is_enclosed(t_map *map)
 
 t_error	ft_check_map_is_rectangular(t_map *map)
 {
-	int n_line;
-	int n1_line;
-	int i;
-	int j;
+	int	n_line;
+	int	n1_line;
+	int	i;
+	int	j;
 
 	n_line = 0;
 	n1_line = n_line + 1;
@@ -82,9 +110,8 @@ t_error	ft_check_map_is_rectangular(t_map *map)
 		n1_line++;
 	}
 	map->map_width = i;
+	map->map_height = n_line;
 	if (map->map_array[n1_line - 1] != NULL)
 		map->map_height = n1_line;
-	else
-		map->map_height = n_line;
-	return (printf("Map is rectangular!\n")NO_ERROR);
+	return (printf("Map is rectangular!\n"), NO_ERROR);
 }

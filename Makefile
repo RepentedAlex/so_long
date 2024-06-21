@@ -18,8 +18,8 @@ WHITE = \033[0;97m
 
 NAME	=	so_long
 CC		=	gcc
-IFLAGS	=	-Iinclude
-LFLAGS	=	-L./libs -lmlx -lmlx_Linux
+IFLAGS	=	-Iinclude -I./extras/Libft/include
+LFLAGS	=	-L./libs -lft -lmlx -lmlx_Linux
 FFLAGS	=	-fsanitize=address
 WFLAGS	=	-Wall -Wextra -Werror -g3
 CFLAGS	=	$(WFLAGS) $(LFLAGS) $(IFLAGS) $(FFLAGS)
@@ -32,7 +32,8 @@ LIBFT	=	extras/Libft
 #############
 
 SRC_FILES	=	so_long \
-				map_utils
+				map_utils \
+				map_utils2
 SRC			=	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJ			=	$(addprefix $(BLD_DIR), $(addsuffix .o, $(SRC_FILES)))
 OBJF		=	.cache_exists

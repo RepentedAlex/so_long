@@ -37,8 +37,14 @@ typedef struct	s_map
 #define NO_ERROR 0
 
 t_error ft_ber_to_array(int fd, t_map *map);
+t_error	ft_check_items(t_map *map);
 t_error	ft_check_map_exists(int *fd, const char *filename);
 t_error ft_check_map_is_enclosed(t_map *map);
 t_error	ft_check_map_is_rectangular(t_map *map);
+t_error	ft_check_sides(t_map *map);
+t_error ft_check_top_bottom(t_map *map);
+t_error	ft_check_walls(const char *line);
+char	*ft_get_to_last_line(t_map *map);
+t_error	ft_is_charset(char c, int *c_count, int *e_count, int *p_count);
 
 #endif

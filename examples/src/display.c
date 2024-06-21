@@ -6,7 +6,7 @@
 /*   By: apetitco <apetitco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 15:02:08 by apetitco          #+#    #+#             */
-/*   Updated: 2024/06/12 16:30:11 by apetitco         ###   ########.fr       */
+/*   Updated: 2024/06/20 15:49:20 by apetitco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,10 @@ int on_destroy(t_data *data)
 	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 	mlx_destroy_display(data->mlx_ptr);
 	free(data->mlx_ptr);
+	free(data->textures[0].image);
+	free(data->textures[1].image);
+	free(data->textures[2].image);
+	free(data->textures[3].image);
 	return (0);
 }
 
