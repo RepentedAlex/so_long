@@ -43,7 +43,7 @@ void ft_flood_fill(t_map *map, int minotaur_x, int minotaur_y)
 	int tmp;
 
 	if ((minotaur_x < 0 && minotaur_y < 0) || map->map_array[minotaur_y][minotaur_x] < 0 || \
-	map->map_array[minotaur_y][minotaur_x] == '1' || minotaur_x >= map->x || minotaur_y >= map->y)
+	map->map_array[minotaur_y][minotaur_x] == '1' || minotaur_x >= map->map_width || minotaur_y >= map->map_height)
 		return ;
 	tmp = map->map_array[minotaur_y][minotaur_x] * -1;
 	map->map_array[minotaur_y][minotaur_x] = (char)tmp;

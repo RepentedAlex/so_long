@@ -35,7 +35,36 @@ t_error	ft_ber_to_array(int fd, t_map *map)
 	map->map_array = ft_split(file, '\n');
 	free(file);
 	printf("Map converted successfully!\n");
-	return (NO_ERROR);
+	return (close(fd), NO_ERROR);
+}
+
+t_error	ft_check_if_finishable(t_map *map)
+{
+	int	i;
+	int	j;
+	int	count_collectibles;
+	int	reach_exit;
+
+	count_collectibles = 0;
+	reach_exit = 0;
+	i = 0;
+	while (i < map->map_height)
+	{
+		j = 0;
+		while (j < map->map_width)
+		{
+			if (map->map_array[i][j] < 0)
+			{
+				ft_reset_char(&map->map_array[i][j], &count_collectibles, \
+				&reach_exit);
+			}
+			j++;
+		}
+		i++;
+	}
+	if (count_collectibles != map->collectibles || !reach_exit)
+		return (printf("Error: Incorrect number of player/exit.\n"), ERROR);
+	return (printf("There is a valid number of player/exit!\n"), NO_ERROR);
 }
 
 t_error	ft_check_items(t_map *map)
@@ -49,11 +78,11 @@ t_error	ft_check_items(t_map *map)
 	collectibles_count = 0;
 	exit_count = 0;
 	player_count = 0;
-	i = 0;
-	while (map->map_array[i])
+	i = 1;
+	while (i < map->map_height)
 	{
-		j = 0;
-		while (map->map_array[i][j] != '\0')
+		j = 1;
+		while (j < map->map_width)
 		{
 			if (ft_is_charset(map->map_array[i][j], &collectibles_count, \
 			&exit_count, &player_count))
@@ -63,7 +92,8 @@ t_error	ft_check_items(t_map *map)
 		i++;
 	}
 	map->collectibles = collectibles_count;
-	return (NO_ERROR);
+	return (printf("%d player, %d exit, %d collectibles\n", \
+	player_count, exit_count, collectibles_count), NO_ERROR);
 }
 
 t_error	ft_check_map_exists(int *fd, const char *filename)
@@ -85,32 +115,4 @@ t_error	ft_check_map_is_enclosed(t_map *map)
 	if (ft_check_top_bottom(map) || ft_check_sides(map))
 		return (printf("Error: Map is not enclose by walls.\n"), ERROR);
 	return (printf("Map is enclosed by walls!\n"), NO_ERROR);
-}
-
-t_error	ft_check_map_is_rectangular(t_map *map)
-{
-	int	n_line;
-	int	n1_line;
-	int	i;
-	int	j;
-
-	n_line = 0;
-	n1_line = n_line + 1;
-	while (map->map_array[n_line] != 0 && map->map_array[n1_line] != 0)
-	{
-		i = 0;
-		while (map->map_array[n_line][i] != 0)
-			i++;
-		j = 0;
-		while (map->map_array[n1_line][j] != 0)
-			j++;
-		if (i != j)
-			return (printf("Error: Map is not rectangular.\n"), ERROR);
-		(n_line++, n1_line++);
-	}
-	map->map_width = i;
-	map->map_height = n_line;
-	if (map->map_array[n1_line - 1] != NULL)
-		map->map_height = n1_line;
-	return (printf("Map is rectangular!\n"), NO_ERROR);
 }

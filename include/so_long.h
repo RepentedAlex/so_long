@@ -29,6 +29,8 @@ typedef struct	s_map
 	char		**map_array;
 	int 		map_height;
 	int 		map_width;
+	int			player_x;
+	int 		player_y;
 	int 		collectibles;
 }				t_map;
 
@@ -37,6 +39,7 @@ typedef struct	s_map
 #define NO_ERROR 0
 
 t_error ft_ber_to_array(int fd, t_map *map);
+t_error ft_check_if_finishable(t_map *map);
 t_error	ft_check_items(t_map *map);
 t_error	ft_check_map_exists(int *fd, const char *filename);
 t_error ft_check_map_is_enclosed(t_map *map);
@@ -50,5 +53,6 @@ t_error	ft_flood_fill_handler(t_map *map);
 void	ft_free_map(t_map *map);
 char	*ft_get_to_last_line(t_map *map);
 t_error	ft_is_charset(char c, int *c_count, int *e_count, int *p_count);
+void	ft_reset_char(char *c, int *c_count, int *r_exit);
 
 #endif

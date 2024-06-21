@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include "so_long.h"
 
 t_error	ft_map_initialisation(const char *filename, t_map *map)
@@ -26,6 +27,8 @@ t_error	ft_map_initialisation(const char *filename, t_map *map)
 		return (ERROR);
 	if (ft_check_items(map))
 		return (ERROR);
+	if (ft_flood_fill_handler(map))
+		return (ERROR);
 	return (NO_ERROR);
 }
 
@@ -33,6 +36,7 @@ int	main(int argc, char *argv[])
 {
 	t_map	map;
 
+	ft_bzero(&map, sizeof(map));
 	if (argc != 2)
 		return (1);
 	if (ft_map_initialisation(argv[1], &map))
