@@ -33,7 +33,10 @@ int	main(int argc, char *argv[])
 {
 	t_map	map;
 
-	if (ft_map_initialisation(argv[1], &map))
+	if (argc != 2)
 		return (1);
+	if (ft_map_initialisation(argv[1], &map))
+		return (2);
+	ft_free_map(&map);
 	return (0);
 }

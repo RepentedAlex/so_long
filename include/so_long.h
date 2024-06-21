@@ -44,6 +44,7 @@ t_error	ft_check_map_is_rectangular(t_map *map);
 t_error	ft_check_sides(t_map *map);
 t_error ft_check_top_bottom(t_map *map);
 t_error	ft_check_walls(const char *line);
+void	ft_free_map(t_map *map);
 char	*ft_get_to_last_line(t_map *map);
 t_error	ft_is_charset(char c, int *c_count, int *e_count, int *p_count);
 

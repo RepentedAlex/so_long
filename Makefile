@@ -22,7 +22,7 @@ IFLAGS	=	-Iinclude -I./extras/Libft/include
 LFLAGS	=	-L./libs -lft -lmlx -lmlx_Linux
 FFLAGS	=	-fsanitize=address
 WFLAGS	=	-Wall -Wextra -Werror -g3
-CFLAGS	=	$(WFLAGS) $(LFLAGS) $(IFLAGS) $(FFLAGS)
+CFLAGS	=	$(WFLAGS) $(IFLAGS) $(FFLAGS)
 SRC_DIR	=	src/
 BLD_DIR	=	build/
 LIBFT	=	extras/Libft
@@ -33,7 +33,8 @@ LIBFT	=	extras/Libft
 
 SRC_FILES	=	so_long \
 				map_utils \
-				map_utils2
+				map_utils2 \
+				map_utils3
 SRC			=	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJ			=	$(addprefix $(BLD_DIR), $(addsuffix .o, $(SRC_FILES)))
 OBJF		=	.cache_exists
@@ -45,23 +46,25 @@ OBJF		=	.cache_exists
 all:	$(NAME)
 
 $(NAME):	$(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LFLAGS)
 
 $(BLD_DIR)%.o:	$(SRC_DIR)%.c | $(OBJF)
-	echo "$(YELLOW)Compiling: $<$(DEF_COLOR)"
-	$(CC) $(CFLAGS) -c $< -o $@
+	@echo "$(YELLOW)Compiling: $<$(DEF_COLOR)"
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJF):
-	mkdir -p $(BLD_DIR)
-	mkdir -p $(addprefix $(BLD_DIR), $(dir $(SRC_FILES)))
-	touch $(OBJF)
-	echo "$(GREEN)Object directory created!$(DEF_COLOR)"
+	@mkdir -p $(BLD_DIR)
+	@mkdir -p $(addprefix $(BLD_DIR), $(dir $(SRC_FILES)))
+	@touch $(OBJF)
+	@echo "$(GREEN)Object directory created!$(DEF_COLOR)"
 
 clean:
-	rm -rf $(BLD_DIR) $(OBJF)
+	@rm -rf $(BLD_DIR) $(OBJF)
+	@echo "$(GREEN)Build files cleaned!$(DEF_COLOR)"
 
 fclean:	clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
+	@echo "$(GREEN)$(NAME) cleaned!$(DEF_COLOR)"
 
 re:	fclean all
 
