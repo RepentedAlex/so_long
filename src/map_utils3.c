@@ -13,6 +13,18 @@
 #include "so_long.h"
 #include "libft.h"
 
+t_error	ft_check_top_bottom(t_map *map)
+{
+	char	*first;
+	char	*last;
+
+	first = map->map_array[0];
+	last = ft_get_to_last_line(map);
+	if (ft_check_walls(first) || ft_check_walls(last))
+		return (ERROR);
+	return (NO_ERROR);
+}
+
 t_error	ft_check_walls(const char *line)
 {
 	int	i;
@@ -62,16 +74,4 @@ t_error	ft_is_charset(char c, int *c_count, int *e_count, int *p_count)
 	else if (c != '0' && c != '1')
 		return (printf("Error: Invalid characters detected on map.\n"), ERROR);
 	return (NO_ERROR);
-}
-
-void	ft_reset_char(char *c, int *c_count, int *r_exit)
-{
-	int	tmp;
-
-	tmp = *c * -1;
-	*c = (char)tmp;
-	if (*c == 'C')
-		*c_count += 1;
-	if (*c == 'E')
-		*r_exit += 1;
 }

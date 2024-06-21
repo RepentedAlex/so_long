@@ -38,6 +38,13 @@ t_error	ft_ber_to_array(int fd, t_map *map)
 	return (close(fd), NO_ERROR);
 }
 
+t_error	ft_check_file_is_ber(const char *filename)
+{
+	if (ft_strncmp(ft_strrchr(filename, '.'), ".ber", 4))
+		return (printf("Error: File provided is not a *.ber file.\n"), ERROR);
+	return (printf("File provided is correct (*.ber)!\n"), NO_ERROR);
+}
+
 t_error	ft_check_if_finishable(t_map *map)
 {
 	int	i;
@@ -79,29 +86,4 @@ t_error	ft_check_items(t_map *map)
 	if (exit_count != 1 || player_count != 1)
 		return (printf("Error: Too many player.s or exit.s.\n"), ERROR);
 	return (printf("Correct number of player and exit!\n"), NO_ERROR);
-}
-
-t_error	ft_check_items_internal(t_map *map, int *c_count, int *e_count, \
-int *p_count)
-{
-	int	i;
-	int	j;
-
-	*c_count = 0;
-	*e_count = 0;
-	*p_count = 0;
-	i = 1;
-	while (i < map->map_height)
-	{
-		j = 1;
-		while (j < map->map_width)
-		{
-			if (ft_is_charset(map->map_array[i][j], c_count, e_count, p_count))
-				return (ERROR);
-			j++;
-		}
-		i++;
-	}
-	map->collectibles = *c_count;
-	return (NO_ERROR);
 }

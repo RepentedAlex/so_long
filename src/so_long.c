@@ -39,8 +39,15 @@ int	main(int argc, char *argv[])
 	ft_bzero(&map, sizeof(map));
 	if (argc != 2)
 		return (1);
+	if (ft_check_file_is_ber(argv[1]))
+		return (ERROR);
 	if (ft_map_initialisation(argv[1], &map))
-		return (ft_free_map(&map), 2);
-	ft_free_map(&map);
+	{
+		if (map.map_array)
+			ft_free_map(&map);
+		return (2);
+	}
+	if (map.map_array != NULL)
+		ft_free_map(&map);
 	return (0);
 }
