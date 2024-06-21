@@ -25,12 +25,14 @@ WFLAGS	=	-Wall -Wextra -Werror -g3
 CFLAGS	=	$(WFLAGS) $(LFLAGS) $(IFLAGS) $(FFLAGS)
 SRC_DIR	=	src/
 BLD_DIR	=	build/
+LIBFT	=	extras/Libft
 
 #############
 ## SOURCES ##
 #############
 
-SRC_FILES	=	so_long
+SRC_FILES	=	so_long \
+				map_utils
 SRC			=	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJ			=	$(addprefix $(BLD_DIR), $(addsuffix .o, $(SRC_FILES)))
 OBJF		=	.cache_exists

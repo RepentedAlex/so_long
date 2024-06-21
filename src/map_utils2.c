@@ -1,34 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.c                                          :+:      :+:    :+:   */
+/*   map_utils2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apetitco <apetitco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/12 14:42:57 by apetitco          #+#    #+#             */
-/*   Updated: 2024/06/12 14:43:27 by apetitco         ###   ########.fr       */
+/*   Created: 2024/06/21 11:05:37 by apetitco          #+#    #+#             */
+/*   Updated: 2024/06/21 11:05:41 by apetitco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+#include "libft.h"
 
-t_error	ft_map_initialisation(const char *filename, t_map *map)
-{
-	int fd;
-
-	if (ft_check_map_exists(&fd, filename))
-		return (ERROR);
-	if (ft_ber_to_array(fd, map))
-		return (ERROR);
-	if (ft_check_map_is_rectangular(map))
-		return (ERROR);
-	return (NO_ERROR);
-}
-
-int	main(void)
-{
-	t_map	map;
-
-
-	return (0);
-}
