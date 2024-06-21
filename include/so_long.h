@@ -6,7 +6,7 @@
 /*   By: apetitco <apetitco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 13:59:03 by apetitco          #+#    #+#             */
-/*   Updated: 2024/06/12 13:59:03 by apetitco         ###   ########.fr       */
+/*   Updated: 2024/06/21 15:42:10 by apetitco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,9 @@ t_error	ft_check_map_is_rectangular(t_map *map);
 t_error	ft_check_sides(t_map *map);
 t_error ft_check_top_bottom(t_map *map);
 t_error	ft_check_walls(const char *line);
+void	ft_find_player(t_map *map);
+void	ft_flood_fill(t_map *map, int minotaur_x, int minotaur_y);
+t_error	ft_flood_fill_handler(t_map *map);
 void	ft_free_map(t_map *map);
 char	*ft_get_to_last_line(t_map *map);
 t_error	ft_is_charset(char c, int *c_count, int *e_count, int *p_count);

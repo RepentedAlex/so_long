@@ -6,7 +6,7 @@
 /*   By: apetitco <apetitco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 10:33:10 by apetitco          #+#    #+#             */
-/*   Updated: 2024/06/21 10:33:17 by apetitco         ###   ########.fr       */
+/*   Updated: 2024/06/21 14:31:25 by apetitco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,7 @@ t_error	ft_check_map_is_rectangular(t_map *map)
 			j++;
 		if (i != j)
 			return (printf("Error: Map is not rectangular.\n"), ERROR);
-		n_line++;
-		n1_line++;
+		(n_line++, n1_line++);
 	}
 	map->map_width = i;
 	map->map_height = n_line;

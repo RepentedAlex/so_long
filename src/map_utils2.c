@@ -30,6 +30,7 @@ t_error	ft_check_sides(t_map *map)
 			return (ERROR);
 		i++;
 	}
+	map->map_width = j;
 	return (NO_ERROR);
 }
 
