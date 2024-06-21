@@ -40,7 +40,8 @@ typedef struct	s_map
 
 t_error ft_ber_to_array(int fd, t_map *map);
 t_error ft_check_if_finishable(t_map *map);
-t_error	ft_check_items(t_map *map);
+t_error ft_check_items(t_map *map);
+t_error	ft_check_items_internal(t_map *map, int *c_count, int *e_count, int *p_count);
 t_error	ft_check_map_exists(int *fd, const char *filename);
 t_error ft_check_map_is_enclosed(t_map *map);
 t_error	ft_check_map_is_rectangular(t_map *map);

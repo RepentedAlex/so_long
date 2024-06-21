@@ -14,7 +14,7 @@
 #include "../include/examples.h"
 #include "../../extras/Libft/include/libft.h"
 
-t_error	ft_check_items(t_map *map)
+t_error	ft_check_items_internal(t_map *map)
 {
 	int collectibles_count;
 	int exit_count;
@@ -209,7 +209,7 @@ void	ft_test_map(const char *filename)
 		return ;
 	if (ft_check_if_map_is_enclosed(&map))
 		return ;
-	if (ft_check_items(&map))
+	if (ft_check_items_internal(&map))
 		return ;
 	if (ft_flood_fill_handler(&map))
 		return ;

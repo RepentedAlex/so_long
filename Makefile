@@ -22,7 +22,8 @@ IFLAGS	=	-Iinclude -I./extras/Libft/include
 LFLAGS	=	-L./libs -lft -lmlx -lmlx_Linux
 FFLAGS	=	-fsanitize=address
 WFLAGS	=	-Wall -Wextra -Werror -g3
-CFLAGS	=	$(WFLAGS) $(IFLAGS) $(FFLAGS)
+CFLAGS	=	$(WFLAGS) $(IFLAGS)
+CFLAGS	+=	$(FFLAGS)
 SRC_DIR	=	src/
 BLD_DIR	=	build/
 LIBFT	=	extras/Libft

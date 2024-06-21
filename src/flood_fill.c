@@ -16,7 +16,7 @@
 void	ft_find_player(t_map *map)
 {
 	int	i;
-	int j;
+	int	j;
 
 	i = 0;
 	while (map->map_array[i])
@@ -28,8 +28,10 @@ void	ft_find_player(t_map *map)
 			{
 				map->player_x = j;
 				map->player_y = i;
-				printf("Player is located on x%d, y%d\n", map->player_x, map->player_y);
-				printf("Is this a P ? %c\n", map->map_array[map->player_y][map->player_x]);
+				printf("Player is located on [y]%d, [x]%d\n", \
+				map->player_y, map->player_x);
+				printf("Is this a P-> %c ?\n", \
+				map->map_array[map->player_y][map->player_x]);
 				return ;
 			}
 			j++;
@@ -38,12 +40,15 @@ void	ft_find_player(t_map *map)
 	}
 }
 
-void ft_flood_fill(t_map *map, int minotaur_x, int minotaur_y)
+void	ft_flood_fill(t_map *map, int minotaur_x, int minotaur_y)
 {
-	int tmp;
+	int	tmp;
 
-	if ((minotaur_x < 0 && minotaur_y < 0) || map->map_array[minotaur_y][minotaur_x] < 0 || \
-	map->map_array[minotaur_y][minotaur_x] == '1' || minotaur_x >= map->map_width || minotaur_y >= map->map_height)
+	if ((minotaur_x < 0 && minotaur_y < 0) \
+	|| map->map_array[minotaur_y][minotaur_x] < 0 \
+	|| map->map_array[minotaur_y][minotaur_x] == '1' \
+	|| minotaur_x >= map->map_width \
+	|| minotaur_y >= map->map_height)
 		return ;
 	tmp = map->map_array[minotaur_y][minotaur_x] * -1;
 	map->map_array[minotaur_y][minotaur_x] = (char)tmp;
@@ -55,8 +60,8 @@ void ft_flood_fill(t_map *map, int minotaur_x, int minotaur_y)
 
 t_error	ft_flood_fill_handler(t_map *map)
 {
-	int mino_x;
-	int mino_y;
+	int	mino_x;
+	int	mino_y;
 
 	ft_find_player(map);
 	mino_x = map->player_x;

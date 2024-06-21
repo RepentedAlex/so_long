@@ -13,6 +13,27 @@
 #include "so_long.h"
 #include "libft.h"
 
+t_error	ft_check_map_exists(int *fd, const char *filename)
+{
+	int	ret;
+
+	if (filename == NULL)
+		return (ERROR);
+	ret = open(filename, O_RDONLY);
+	if (ret == -1)
+		return (printf("Error : Couldn't open map file.\n"));
+	printf("Map loaded successfully!\n");
+	*fd = ret;
+	return (NO_ERROR);
+}
+
+t_error	ft_check_map_is_enclosed(t_map *map)
+{
+	if (ft_check_top_bottom(map) || ft_check_sides(map))
+		return (printf("Error: Map is not enclose by walls.\n"), ERROR);
+	return (printf("Map is enclosed by walls!\n"), NO_ERROR);
+}
+
 t_error	ft_check_map_is_rectangular(t_map *map)
 {
 	int	n_line;
@@ -73,32 +94,4 @@ t_error	ft_check_top_bottom(t_map *map)
 	if (ft_check_walls(first) || ft_check_walls(last))
 		return (ERROR);
 	return (NO_ERROR);
-}
-
-t_error	ft_check_walls(const char *line)
-{
-	int	i;
-
-	i = 0;
-	while (line[i] && line[i] == '1')
-	{
-		if (line[i] != '1')
-			return (ERROR);
-		i++;
-	}
-	return (NO_ERROR);
-}
-
-void	ft_free_map(t_map *map)
-{
-	int	i;
-
-	i = 0;
-	while (i < map->map_height)
-	{
-		free(map->map_array[i]);
-		i++;
-	}
-	free(map->map_array[i]);
-	free(map->map_array);
 }

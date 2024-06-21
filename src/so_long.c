@@ -40,7 +40,7 @@ int	main(int argc, char *argv[])
 	if (argc != 2)
 		return (1);
 	if (ft_map_initialisation(argv[1], &map))
-		return (2);
+		return (ft_free_map(&map), 2);
 	ft_free_map(&map);
 	return (0);
 }
