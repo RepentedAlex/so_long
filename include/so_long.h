@@ -34,6 +34,7 @@ typedef struct	s_map
 	int 		collectibles;
 }				t_map;
 
+/*Size of the buffer used to read the .ber file*/
 #define BUFFER_SIZE 256
 #define ERROR 1
 #define NO_ERROR 0
