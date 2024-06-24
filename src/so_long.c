@@ -14,7 +14,25 @@
 #include "libft.h"
 #include "so_long.h"
 
-t_error	ft_map_initialisation(const char *filename, t_map_data *map)
+static t_error	ft_init_game(t_game_instance *current)
+{
+	current->mlx_ptr = mlx_init();
+	if (!current->mlx_ptr)
+		return (ERROR);
+	current->win_ptr = mlx_new_window(current->mlx_ptr, 600, 400, "hi :)");
+	if (!current->win_ptr)
+		return (free(current->mlx_ptr), ERROR);
+	return (NO_ERROR);
+}
+
+static t_error	ft_texture_initialisation(t_textures *textures, t_game_instance * current)
+{
+	if (ft_load_textures(textures, current))
+		return (ERROR);
+	return (NO_ERROR);
+}
+
+static t_error	ft_map_initialisation(const char *filename, t_map_data *map)
 {
 	int	fd;
 
@@ -35,7 +53,9 @@ t_error	ft_map_initialisation(const char *filename, t_map_data *map)
 
 int	main(int argc, char *argv[])
 {
-	t_map_data	map;
+	t_map_data		map;
+	t_textures		textures;
+	t_game_instance	current;
 
 	ft_bzero(&map, sizeof(map));
 	if (argc != 2)
@@ -48,7 +68,19 @@ int	main(int argc, char *argv[])
 			ft_free_map(&map);
 		return (2);
 	}
-	if (map.map_array != NULL)
+	if (ft_init_game(&current))
+		return (ERROR);
+	if (ft_texture_initialisation(&textures, &current))
+	{
+		if (map.map_array)
+			free(map.map_array);
+		return (3);
+	}
+	if (map.map_array)
 		ft_free_map(&map);
+//	ft_free_textures(&textures);
+	mlx_destroy_window(current.mlx_ptr, current.win_ptr);
+	mlx_destroy_display(current.mlx_ptr);
+	free(current.mlx_ptr);
 	return (0);
 }

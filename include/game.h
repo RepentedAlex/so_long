@@ -59,14 +59,6 @@ typedef struct	s_game_resolutions
 	char		*map_name;
 }				t_game_resolutions;
 
-typedef struct	s_game_data
-{
-	int			collectibles_count;
-	int			exit_count;
-	int			movement_count;
-	int			player_count;
-}				t_game_data;
-
 typedef struct	s_game_positions
 {
 	int			player_row;
@@ -74,6 +66,14 @@ typedef struct	s_game_positions
 	int			exit_row;
 	int			exit_column;
 }				t_game_positions;
+
+typedef struct	s_game_data
+{
+	int			collectibles_count;
+	int			exit_count;
+	int			movement_count;
+	int			player_count;
+}				t_game_data;
 
 typedef struct			s_game_instance
 {
@@ -95,6 +95,8 @@ void	ft_find_player(t_map_data *map);
 void	ft_flood_fill(t_map_data *map, int minotaur_x, int minotaur_y);
 t_error	ft_flood_fill_handler(t_map_data *map);
 void	ft_free_map(t_map_data *map);
+void	ft_free_textures(t_textures *textures);
 char	*ft_get_to_last_line(t_map_data *map);
+t_error	ft_load_textures(t_textures *textures, t_game_instance *current);
 
 #endif

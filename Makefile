@@ -19,7 +19,7 @@ WHITE = \033[0;97m
 NAME	=	so_long
 CC		=	gcc
 IFLAGS	=	-Iinclude -I./extras/Libft/include
-LFLAGS	=	-L./libs -lft -lmlx -lmlx_Linux
+LFLAGS	=	-L./libs -lft -lmlx -lmlx_Linux -L/usr/lib -I./extras/minilibx-linux/mlx_linux -lXext -lX11 -lm -lz
 FFLAGS	=	-fsanitize=address
 WFLAGS	=	-Wall -Wextra -Werror -g3
 CFLAGS	=	$(WFLAGS) $(IFLAGS)
@@ -37,7 +37,8 @@ SRC_FILES	=	so_long \
 				map_utils \
 				map_utils2 \
 				map_utils3 \
-				map_utils4
+				map_utils4 \
+				textures
 SRC			=	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJ			=	$(addprefix $(BLD_DIR), $(addsuffix .o, $(SRC_FILES)))
 OBJF		=	.cache_exists
@@ -49,25 +50,27 @@ OBJF		=	.cache_exists
 all:	$(NAME)
 
 $(NAME):	$(OBJ)
+	@echo "$(BLUE)Linking $<$(DEF_COLOR)"
 	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LFLAGS)
+	@echo "$(GREEN)$< linked !$(DEF_COLOR)"
 
 $(BLD_DIR)%.o:	$(SRC_DIR)%.c | $(OBJF)
-	@echo "$(YELLOW)Compiling: $<$(DEF_COLOR)"
+	@echo "$(BLUE)Compiling: $<$(DEF_COLOR)"
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJF):
 	@mkdir -p $(BLD_DIR)
 	@mkdir -p $(addprefix $(BLD_DIR), $(dir $(SRC_FILES)))
 	@touch $(OBJF)
-	@echo "$(GREEN)Object directory created!$(DEF_COLOR)"
+	@echo "$(BLUE)Object directory created!$(DEF_COLOR)"
 
 clean:
 	@rm -rf $(BLD_DIR) $(OBJF)
-	@echo "$(GREEN)Build files cleaned!$(DEF_COLOR)"
+	@echo "$(MAGENTA)Build files cleaned!$(DEF_COLOR)"
 
 fclean:	clean
 	@rm -f $(NAME)
-	@echo "$(GREEN)$(NAME) cleaned!$(DEF_COLOR)"
+	@echo "$(MAGENTA)$(NAME) cleaned!$(DEF_COLOR)"
 
 re:	fclean all
 
