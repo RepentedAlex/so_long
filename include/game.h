@@ -26,6 +26,7 @@
 #define RIGHT 65363
 #define DOWN 65364
 
+// Stores all textures
 typedef struct	s_textures
 {
 	void		*collectible;
@@ -41,62 +42,61 @@ typedef struct	s_textures
 	int			image_height;
 }				t_textures;
 
-typedef struct	s_map_data
+// Stores all data that is solely related to the map
+typedef struct	s_map
 {
-	char		**map_array;
-	int 		map_height;
-	int 		map_width;
-	int			player_x;
-	int 		player_y;
+	char		**map;
+	int 		height;
+	int 		width;
 	int 		collectibles;
-}				t_map_data;
+}				t_map;
 
-typedef struct	s_game_resolutions
-{
-	int			map_width;
-	int			map_height;
-	char		*window_name;
-	char		*map_name;
-}				t_game_resolutions;
-
+// Stores all data solely related to in game positions
 typedef struct	s_game_positions
 {
-	int			player_row;
-	int			player_column;
-	int			exit_row;
-	int			exit_column;
+	int			player_y;
+	int			player_x;
+	int			exit_y;
+	int			exit_x;
 }				t_game_positions;
 
+
+// Stores all data tracking game status
 typedef struct	s_game_data
 {
+	int			exit_status;
 	int			collectibles_count;
-	int			exit_count;
-	int			movement_count;
-	int			player_count;
+	int			movements_count;
+//	int			player_count;
 }				t_game_data;
 
+
+// Stores all structures as well as the pointers for the minilibx
 typedef struct			s_game_instance
 {
 	void				*mlx_ptr;
 	void				*win_ptr;
-	t_game_positions	positions_init;
+	t_game_positions	game_pos;
 	t_game_data			game_data;
+	t_map				map;
+	t_textures			textures;
 }						t_game_instance;
 
-t_error ft_ber_to_array(int fd, t_map_data *map);
-t_error ft_check_if_finishable(t_map_data *map);
-t_error ft_check_items(t_map_data *map);
-t_error	ft_check_items_internal(t_map_data *map, int *c_count, int *e_count, int *p_count);
-t_error ft_check_map_is_enclosed(t_map_data *map);
-t_error	ft_check_map_is_rectangular(t_map_data *map);
-t_error	ft_check_sides(t_map_data *map);
-t_error ft_check_top_bottom(t_map_data *map);
-void	ft_find_player(t_map_data *map);
-void	ft_flood_fill(t_map_data *map, int minotaur_x, int minotaur_y);
-t_error	ft_flood_fill_handler(t_map_data *map);
-void	ft_free_map(t_map_data *map);
+t_error ft_ber_to_array(int fd, t_map *map);
+t_error ft_check_if_finishable(t_map *map);
+t_error ft_check_items(t_map *map);
+t_error	ft_check_items_internal(t_map *map, int *c_count, int *e_count, int *p_count);
+t_error ft_check_map_is_enclosed(t_map *map);
+t_error	ft_check_map_is_rectangular(t_map *map);
+t_error	ft_check_sides(t_map *map);
+t_error ft_check_top_bottom(t_map *map);
+t_error ft_find_exit(t_map *map, t_game_positions *game_pos);
+t_error ft_find_player(t_map *map, t_game_positions *game_pos);
+void	ft_flood_fill(t_map *map, int minotaur_x, int minotaur_y);
+t_error ft_flood_fill_handler(t_map *map, t_game_positions *game_pos);
+void	ft_free_map(t_map *map);
 void	ft_free_textures(t_textures *textures);
-char	*ft_get_to_last_line(t_map_data *map);
+char	*ft_get_to_last_line(t_map *map);
 t_error	ft_load_textures(t_textures *textures, t_game_instance *current);
 
 #endif

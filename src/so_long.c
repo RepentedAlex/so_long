@@ -32,53 +32,52 @@ static t_error	ft_texture_initialisation(t_textures *textures, t_game_instance *
 	return (NO_ERROR);
 }
 
-static t_error	ft_map_initialisation(const char *filename, t_map_data *map)
+static t_error ft_map_initialisation(const char *filename, t_map *map, t_game_positions *game_pos)
 {
 	int	fd;
 
 	if (ft_check_map_exists(&fd, filename))
 		return (ERROR);
 	if (ft_ber_to_array(fd, map))
-		return (ERROR);
+		return (printf("Error: Couldn't convert map to 2D array.\n"), ERROR);
 	if (ft_check_map_is_rectangular(map))
 		return (ERROR);
 	if (ft_check_map_is_enclosed(map))
 		return (ERROR);
 	if (ft_check_items(map))
 		return (ERROR);
-	if (ft_flood_fill_handler(map))
+	if (ft_flood_fill_handler(map, game_pos))
+		return (ERROR);
+	if (ft_find_exit(map, game_pos))
 		return (ERROR);
 	return (NO_ERROR);
 }
 
 int	main(int argc, char *argv[])
 {
-	t_map_data		map;
-	t_textures		textures;
-	t_game_instance	current;
+	t_game_instance		current;
 
-	ft_bzero(&map, sizeof(map));
+	ft_bzero(&current, sizeof(current));
 	if (argc != 2)
 		return (1);
 	if (ft_check_file_is_ber(argv[1]))
 		return (ERROR);
-	if (ft_map_initialisation(argv[1], &map))
+	if (ft_map_initialisation(argv[1], &current.map, &current.game_pos))
 	{
-		if (map.map_array)
-			ft_free_map(&map);
+		if (current.map.map)
+			ft_free_map(&current.map);
 		return (2);
 	}
 	if (ft_init_game(&current))
 		return (ERROR);
-	if (ft_texture_initialisation(&textures, &current))
+	if (ft_texture_initialisation(&current.textures, &current))
 	{
-		if (map.map_array)
-			free(map.map_array);
+		if (current.map.map)
+			free(current.map.map);
 		return (3);
 	}
-	if (map.map_array)
-		ft_free_map(&map);
-//	ft_free_textures(&textures);
+	if (current.map.map)
+		ft_free_map(&current.map);
 	mlx_destroy_window(current.mlx_ptr, current.win_ptr);
 	mlx_destroy_display(current.mlx_ptr);
 	free(current.mlx_ptr);

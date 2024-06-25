@@ -14,6 +14,19 @@
 #include "libft.h"
 #include "so_long.h"
 
+t_error	ft_is_charset(char c, int *c_count, int *e_count, int *p_count)
+{
+	if (c == 'C')
+		*c_count += 1;
+	else if (c == 'E')
+		*e_count += 1;
+	else if (c == 'P')
+		*p_count += 1;
+	else if (c != '0' && c != '1')
+		return (printf("Error: Invalid characters detected on map.\n"), ERROR);
+	return (NO_ERROR);
+}
+
 void	ft_reset_char(char *c, int *c_count, int *r_exit)
 {
 	int	tmp;

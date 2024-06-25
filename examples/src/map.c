@@ -14,7 +14,7 @@
 #include "../include/examples.h"
 #include "../../extras/Libft/include/libft.h"
 
-t_error	ft_check_items_internal(t_map_data *map)
+t_error	ft_check_items_internal(t_map *map)
 {
 	int collectibles_count;
 	int exit_count;
@@ -26,18 +26,18 @@ t_error	ft_check_items_internal(t_map_data *map)
 	exit_count = 0;
 	player_count = 0;
 	i = 0;
-	while (map->map_array[i])
+	while (map->map[i])
 	{
 		j = 0;
-		while (map->map_array[i][j] != '\0')
+		while (map->map[i][j] != '\0')
 		{
-			if (map->map_array[i][j] == 'C')
+			if (map->map[i][j] == 'C')
 				collectibles_count++;
-			else if (map->map_array[i][j] == 'E' && exit_count == 0)
+			else if (map->map[i][j] == 'E' && exit_count == 0)
 				exit_count++;
-			else if (map->map_array[i][j] == 'P' && player_count == 0)
+			else if (map->map[i][j] == 'P' && player_count == 0)
 				player_count++;
-			else if (map->map_array[i][j] != '0' && map->map_array[i][j] != '1')
+			else if (map->map[i][j] != '0' && map->map[i][j] != '1')
 			{
 				printf("Invalid character detected, must EXTERMINATE\n");
 				return (ERROR);
@@ -50,20 +50,20 @@ t_error	ft_check_items_internal(t_map_data *map)
 	return (NO_ERROR);
 }
 
-static t_error	ft_check_sides(t_map_data *map)
+static t_error	ft_check_sides(t_map *map)
 {
 	int i;
 	int j;
 
 	i = 0;
-	while (map->map_array[i])
+	while (map->map[i])
 	{
-		if (map->map_array[i][0] != '1')
+		if (map->map[i][0] != '1')
 			return (ERROR);
 		j = 0;
-		while (map->map_array[i][j] && map->map_array[i][j + 1] != '\0')
+		while (map->map[i][j] && map->map[i][j + 1] != '\0')
 			j++;
-		if (map->map_array[i][j] != '1')
+		if (map->map[i][j] != '1')
 			return (ERROR);
 		i++;
 	}
@@ -84,22 +84,22 @@ static bool ft_check_wall_line(const char *line)
 	return (NO_ERROR);
 }
 
-static char *ft_get_to_last_line(t_map_data *map)
+static char *ft_get_to_last_line(t_map *map)
 {
 	int i;
 
 	i = 0;
-	while (map->map_array[i + 1] != 0)
+	while (map->map[i + 1] != 0)
 		i++;
-	return map->map_array[i];
+	return map->map[i];
 }
 
-static t_error	ft_check_top_bottom(t_map_data *map)
+static t_error	ft_check_top_bottom(t_map *map)
 {
 	char *first;
 	char *last;
 
-	first = map->map_array[0];
+	first = map->map[0];
 	last = ft_get_to_last_line(map);
 	if (ft_check_wall_line(first) || ft_check_wall_line(last))
 		return (ERROR);
@@ -107,7 +107,7 @@ static t_error	ft_check_top_bottom(t_map_data *map)
 		return (NO_ERROR);
 }
 
-t_error	ft_check_if_map_is_enclosed(t_map_data *map)
+t_error	ft_check_if_map_is_enclosed(t_map *map)
 {
 	if (ft_check_top_bottom(map) || ft_check_sides(map))
 	{
@@ -121,10 +121,10 @@ t_error	ft_check_if_map_is_enclosed(t_map_data *map)
 	}
 }
 
-/// \brief Checks if the provided map_array is correctly enclosed by walls.
-/// \param map The provided map_array to check.
-/// \return true if map_array is valid, 0 if invalid.
-t_error	ft_check_map_is_rectangular(t_map_data *map)
+/// \brief Checks if the provided map is correctly enclosed by walls.
+/// \param map The provided map to check.
+/// \return true if map is valid, 0 if invalid.
+t_error	ft_check_map_is_rectangular(t_map *map)
 {
 	int	n_line;
 	int n1_line;
@@ -133,13 +133,13 @@ t_error	ft_check_map_is_rectangular(t_map_data *map)
 
 	n_line = 0;
 	n1_line = n_line + 1;
-	while(map->map_array[n_line] != 0 && map->map_array[n1_line] != 0)
+	while(map->map[n_line] != 0 && map->map[n1_line] != 0)
 	{
 		i = 0;
-		while (map->map_array[n_line][i] != 0)
+		while (map->map[n_line][i] != 0)
 			i++;
 		j = 0;
-		while (map->map_array[n1_line][j] != 0)
+		while (map->map[n1_line][j] != 0)
 			j++;
 		if (i != j)
 			return (printf("Map isn't rectangular! :(\n"), ERROR);
@@ -147,7 +147,7 @@ t_error	ft_check_map_is_rectangular(t_map_data *map)
 		n1_line ++;
 	}
 	map->x = i;
-	if (map->map_array[n1_line - 1] != NULL)
+	if (map->map[n1_line - 1] != NULL)
 		map->y = n1_line;
 	else
 		map->y = n_line;
@@ -156,7 +156,7 @@ t_error	ft_check_map_is_rectangular(t_map_data *map)
 	return (NO_ERROR);
 }
 
-t_error	ft_ber_to_array(int fd, t_map_data *map)
+t_error	ft_ber_to_array(int fd, t_map *map)
 {
 	static char		buff[BUFFER_SIZE + 1];
 	char		*file;
@@ -175,7 +175,7 @@ t_error	ft_ber_to_array(int fd, t_map_data *map)
 	}
 	if (br < 0)
 		return (free(file), ERROR);
-	map->map_array = ft_split(file, '\n');
+	map->map = ft_split(file, '\n');
 	free(file);
 	printf("Map converted successfully!\n");
 	return (NO_ERROR);
@@ -197,7 +197,7 @@ t_error	ft_check_map_exists(int *fd, const char *filename)
 void	ft_test_map(const char *filename)
 {
 	int	fd;
-	t_map_data map;
+	t_map map;
 
 	ft_bzero(&map, sizeof(map));
 	if (ft_check_map_exists(&fd, filename))
@@ -211,7 +211,7 @@ void	ft_test_map(const char *filename)
 		return ;
 	if (ft_check_items_internal(&map))
 		return ;
-	if (ft_flood_fill_handler(&map))
+	if (ft_flood_fill_handler(&map, NULL))
 		return ;
 	ft_free_map(&map);
 }

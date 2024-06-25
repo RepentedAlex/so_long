@@ -30,15 +30,15 @@ typedef bool t_error;
 #define ERROR 1
 #define NO_ERROR 0
 
-typedef struct s_map_data
+typedef struct s_map
 {
-	char 	**map_array;
+	char 	**map;
 	int		x;
 	int 	y;
 	int 	player_x;
 	int 	player_y;
 	int 	collectibles;
-}				t_map_data;
+}				t_map;
 
 typedef struct s_texture
 {
@@ -51,25 +51,25 @@ typedef struct s_data
 {
 	void		*mlx_ptr;
 	void		*win_ptr;
-	t_map_data		*map;
+	t_map		*map;
 	t_texture	textures[5];
 
 }				t_data;
 
-t_error	ft_ber_to_array(int fd, t_map_data *map);
-t_error ft_check_if_finishable(t_map_data *map);
-t_error	ft_check_if_map_is_enclosed(t_map_data *map);
-t_error	ft_check_items_internal(t_map_data *map);
+t_error	ft_ber_to_array(int fd, t_map *map);
+t_error ft_check_if_finishable(t_map *map);
+t_error	ft_check_if_map_is_enclosed(t_map *map);
+t_error	ft_check_items_internal(t_map *map);
 t_error	ft_check_map_exists(int *fd, const char *filename);
-t_error	ft_check_map_is_rectangular(t_map_data *map);
-void	ft_free_map(t_map_data *map);
-void	ft_flood_fill(t_map_data *map, int minotaur_x, int minotaur_y);
-t_error	ft_flood_fill_handler(t_map_data *map);
+t_error	ft_check_map_is_rectangular(t_map *map);
+void	ft_free_map(t_map *map);
+void	ft_flood_fill(t_map *map, int minotaur_x, int minotaur_y);
+t_error ft_flood_fill_handler(t_map *map, struct s_game_positions *game_pos);
 void	ft_test_map(const char *filename);
 int		ft_test_displaying(void);
 
 
-t_error get_char_in_map(t_map_data *map, int x, int y, char *out);
+t_error get_char_in_map(t_map *map, int x, int y, char *out);
 
 
 

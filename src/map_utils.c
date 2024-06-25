@@ -14,7 +14,7 @@
 #include "libft.h"
 #include "so_long.h"
 
-t_error	ft_ber_to_array(int fd, t_map_data *map)
+t_error	ft_ber_to_array(int fd, t_map *map)
 {
 	char	buffer[BUFFER_SIZE + 1];
 	char	*file;
@@ -33,7 +33,7 @@ t_error	ft_ber_to_array(int fd, t_map_data *map)
 	}
 	if (bytes_read < 0)
 		return (free(file), ERROR);
-	map->map_array = ft_split(file, '\n');
+	map->map = ft_split(file, '\n');
 	free(file);
 	printf("Map converted successfully!\n");
 	return (close(fd), NO_ERROR);
@@ -46,7 +46,7 @@ t_error	ft_check_file_is_ber(const char *filename)
 	return (printf("File provided is correct (*.ber)!\n"), NO_ERROR);
 }
 
-t_error	ft_check_if_finishable(t_map_data *map)
+t_error	ft_check_if_finishable(t_map *map)
 {
 	int	i;
 	int	j;
@@ -56,14 +56,14 @@ t_error	ft_check_if_finishable(t_map_data *map)
 	count_collectibles = 0;
 	reach_exit = 0;
 	i = 0;
-	while (i < map->map_height)
+	while (i < map->height)
 	{
 		j = 0;
-		while (j < map->map_width)
+		while (j < map->width)
 		{
-			if (map->map_array[i][j] < 0)
+			if (map->map[i][j] < 0)
 			{
-				ft_reset_char(&map->map_array[i][j], &count_collectibles, \
+				ft_reset_char(&map->map[i][j], &count_collectibles, \
 				&reach_exit);
 			}
 			j++;
@@ -75,7 +75,7 @@ t_error	ft_check_if_finishable(t_map_data *map)
 	return (printf("Map is completable!\n"), NO_ERROR);
 }
 
-t_error	ft_check_items(t_map_data *map)
+t_error	ft_check_items(t_map *map)
 {
 	int	collectibles_count;
 	int	exit_count;

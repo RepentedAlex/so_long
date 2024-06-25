@@ -14,16 +14,44 @@
 #include "libft.h"
 #include "so_long.h"
 
-t_error	ft_check_top_bottom(t_map_data *map)
+t_error	ft_check_top_bottom(t_map *map)
 {
 	char	*first;
 	char	*last;
 
-	first = map->map_array[0];
+	first = map->map[0];
 	last = ft_get_to_last_line(map);
 	if (ft_check_walls(first) || ft_check_walls(last))
 		return (ERROR);
 	return (NO_ERROR);
+}
+
+t_error ft_find_exit(t_map *map, t_game_positions *game_pos)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (map->map[i])
+	{
+		j = 0;
+		while (map->map[i][j])
+		{
+			if (map->map[i][j] == 'E')
+			{
+				game_pos->exit_x = j;
+				game_pos->exit_y = i;
+				printf("Exit is located on [y]%d, [x]%d\n", \
+				game_pos->exit_y, game_pos->exit_x);
+				printf("Is this a 'E'-> %c ?\n", \
+				map->map[game_pos->exit_y][game_pos->exit_x]);
+				return (NO_ERROR);
+			}
+			j++;
+		}
+		i++;
+	}
+	return (ERROR);
 }
 
 t_error	ft_check_walls(const char *line)
@@ -40,39 +68,26 @@ t_error	ft_check_walls(const char *line)
 	return (NO_ERROR);
 }
 
-void	ft_free_map(t_map_data *map)
+void	ft_free_map(t_map *map)
 {
 	int	i;
 
 	i = 0;
-	while (i < map->map_height)
+	while (i < map->height)
 	{
-		free(map->map_array[i]);
+		free(map->map[i]);
 		i++;
 	}
-	free(map->map_array[i]);
-	free(map->map_array);
+	free(map->map[i]);
+	free(map->map);
 }
 
-char	*ft_get_to_last_line(t_map_data *map)
+char	*ft_get_to_last_line(t_map *map)
 {
 	int	i;
 
 	i = 0;
-	while (map->map_array[i + 1] != 0)
+	while (map->map[i + 1] != 0)
 		i++;
-	return (map->map_array[i]);
-}
-
-t_error	ft_is_charset(char c, int *c_count, int *e_count, int *p_count)
-{
-	if (c == 'C')
-		*c_count += 1;
-	else if (c == 'E')
-		*e_count += 1;
-	else if (c == 'P')
-		*p_count += 1;
-	else if (c != '0' && c != '1')
-		return (printf("Error: Invalid characters detected on map.\n"), ERROR);
-	return (NO_ERROR);
+	return (map->map[i]);
 }
