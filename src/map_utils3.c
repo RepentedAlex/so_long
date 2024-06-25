@@ -6,7 +6,7 @@
 /*   By: apetitco <apetitco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 14:27:03 by apetitco          #+#    #+#             */
-/*   Updated: 2024/06/21 14:27:03 by apetitco         ###   ########.fr       */
+/*   Updated: 2024/06/25 17:25:01 by apetitco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ void	ft_free_map(t_map *map)
 {
 	int	i;
 
+	if (!map)
+		return ;
 	i = 0;
 	while (i < map->height)
 	{
@@ -79,6 +81,7 @@ void	ft_free_map(t_map *map)
 	}
 	free(map->map[i]);
 	free(map->map);
+	map->map = NULL;
 }
 
 char	*ft_get_to_last_line(t_map *map)

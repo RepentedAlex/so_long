@@ -6,7 +6,7 @@
 /*   By: apetitco <apetitco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 16:33:30 by apetitco          #+#    #+#             */
-/*   Updated: 2024/06/25 16:33:30 by apetitco         ###   ########.fr       */
+/*   Updated: 2024/06/25 17:29:54 by apetitco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,7 @@ int key_hook_w(int keycode, t_game_instance *game_instance)
 
 int exit_point(t_game_instance *game_instance)
 {
-	printf("Exiting...\n");
-	if (game_instance->win_ptr)
-		mlx_destroy_window(game_instance->win_ptr, game_instance->win_ptr);
-	free(game_instance->mlx_ptr);
-	ft_free_map(&game_instance->map);
-	free(game_instance->map.map);
-//	mlx_destroy_display(game_instance->mlx_ptr);
+	mlx_loop_end(game_instance->mlx_ptr);
 	return (0);
 }
 

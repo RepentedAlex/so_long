@@ -6,7 +6,7 @@
 /*   By: apetitco <apetitco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 13:59:03 by apetitco          #+#    #+#             */
-/*   Updated: 2024/06/21 15:42:10 by apetitco         ###   ########.fr       */
+/*   Updated: 2024/06/25 18:04:39 by apetitco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,12 +103,14 @@ t_error ft_flood_fill_handler(t_map *map, t_game_positions *game_pos);
 void	ft_free_map(t_map *map);
 //void	ft_free_textures(t_textures *textures);
 char	*ft_get_to_last_line(t_map *map);
-t_error	ft_load_textures(t_textures *textures, t_game_instance *current);
+t_error	ft_load_textures(t_game_instance *current);
 
 
 int exit_point(t_game_instance *game_instance);
 
 int controls(int keycode, t_game_instance *game_instance);
+
+void	ft_free_textures(t_game_instance *game_instance);
 
 t_error ft_check_file_is_ber(const char *filename);
 

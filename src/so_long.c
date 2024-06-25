@@ -6,7 +6,7 @@
 /*   By: apetitco <apetitco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 14:42:57 by apetitco          #+#    #+#             */
-/*   Updated: 2024/06/21 14:12:29 by apetitco         ###   ########.fr       */
+/*   Updated: 2024/06/25 18:14:53 by apetitco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ static t_error	ft_init_game(t_game_instance *game_instance)
 	return (NO_ERROR);
 }
 
-static t_error	ft_texture_initialisation(t_textures *textures, t_game_instance * current)
+static t_error	ft_texture_initialisation(t_game_instance *current)
 {
-	if (ft_load_textures(textures, current))
+	if (ft_load_textures(current))
 		return (ERROR);
 	return (NO_ERROR);
 }
@@ -52,10 +52,23 @@ static t_error ft_map_initialisation(const char *filename, t_map *map, t_game_po
 	return (NO_ERROR);
 }
 
+void	ft_destroyer(t_game_instance *game_instance)
+{
+	printf("Exiting...\n");
+	ft_free_textures(game_instance);
+	if (game_instance->win_ptr)
+		mlx_destroy_window(game_instance->mlx_ptr, game_instance->win_ptr);
+	mlx_destroy_display(game_instance->mlx_ptr);
+	free(game_instance->mlx_ptr);
+	ft_free_map(&game_instance->map);
+	free(game_instance->map.map);
+}
+
 int	main(int argc, char *argv[])
 {
 	t_game_instance		current;
 
+	(void)argv;
 	ft_bzero(&current, sizeof(current));
 	if (argc != 2)
 		return (1);
@@ -69,16 +82,15 @@ int	main(int argc, char *argv[])
 	}
 	if (ft_init_game(&current))
 		return (ERROR);
-	if (ft_texture_initialisation(&current.textures, &current))
+	if (ft_texture_initialisation(&current))
 	{
 		if (current.map.map)
 			free(current.map.map);
 		return (3);
 	}
-	if (current.map.map)
-		ft_free_map(&current.map);
 	mlx_key_hook(current.win_ptr, controls, &current);
 	mlx_hook(current.win_ptr, 17, 1L<<0, exit_point, &current);
 	mlx_loop(current.mlx_ptr);
+	ft_destroyer(&current);
 	return (0);
 }
