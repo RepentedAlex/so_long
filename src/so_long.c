@@ -10,18 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "game.h"
 #include "libft.h"
 #include "so_long.h"
 
-static t_error	ft_init_game(t_game_instance *current)
+static t_error	ft_init_game(t_game_instance *game_instance)
 {
-	current->mlx_ptr = mlx_init();
-	if (!current->mlx_ptr)
+	game_instance->mlx_ptr = mlx_init();
+	if (!game_instance->mlx_ptr)
 		return (ERROR);
-	current->win_ptr = mlx_new_window(current->mlx_ptr, 600, 400, "hi :)");
-	if (!current->win_ptr)
-		return (free(current->mlx_ptr), ERROR);
+	game_instance->win_ptr = mlx_new_window(game_instance->mlx_ptr, 600, 400, "hi :)");
+	if (!game_instance->win_ptr)
+		return (free(game_instance->mlx_ptr), ERROR);
 	return (NO_ERROR);
 }
 
@@ -78,8 +77,8 @@ int	main(int argc, char *argv[])
 	}
 	if (current.map.map)
 		ft_free_map(&current.map);
-	mlx_destroy_window(current.mlx_ptr, current.win_ptr);
-	mlx_destroy_display(current.mlx_ptr);
-	free(current.mlx_ptr);
+	mlx_key_hook(current.win_ptr, controls, &current);
+	mlx_hook(current.win_ptr, 17, 1L<<0, exit_point, &current);
+	mlx_loop(current.mlx_ptr);
 	return (0);
 }

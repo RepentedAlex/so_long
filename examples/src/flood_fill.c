@@ -12,7 +12,6 @@
 
 #include "../include/examples.h"
 #include "../../extras/Libft/include/libft.h"
-#include "game.h"
 
 static void ft_find_player(t_map *map, t_game_positions *game_pos)
 {

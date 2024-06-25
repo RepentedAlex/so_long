@@ -33,6 +33,7 @@ LIBFT	=	extras/Libft
 #############
 
 SRC_FILES	=	so_long \
+				inputs_handler \
 				flood_fill \
 				map_utils \
 				map_utils2 \
