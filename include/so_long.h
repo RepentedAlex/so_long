@@ -113,6 +113,7 @@ t_error	ft_load_textures(t_game_instance *current);
 
 //-----Displaying-----
 void	draw_initial_state(t_game_instance *game_instance);
+void	update_display_after_move(t_game_instance *game_instance, t_directions direction);
 
 int		exit_point(t_game_instance *game_instance);
 

@@ -12,6 +12,30 @@
 
 #include "so_long.h"
 
+void	update_display_after_move(t_game_instance *game_instance, t_directions direction)
+{
+	if (direction == up)
+	{
+		mlx_put_image_to_window(game_instance->mlx_ptr, game_instance->win_ptr, game_instance->textures.floor, game_instance->game_pos.player_x * 32, (game_instance->game_pos.player_y + 1) * 32);
+		mlx_put_image_to_window(game_instance->mlx_ptr, game_instance->win_ptr, game_instance->textures.player_up, game_instance->game_pos.player_x * 32, game_instance->game_pos.player_y * 32);
+	}
+	if (direction == down)
+	{
+		mlx_put_image_to_window(game_instance->mlx_ptr, game_instance->win_ptr, game_instance->textures.floor, game_instance->game_pos.player_x * 32, (game_instance->game_pos.player_y - 1) * 32);
+		mlx_put_image_to_window(game_instance->mlx_ptr, game_instance->win_ptr, game_instance->textures.player_down, game_instance->game_pos.player_x * 32, game_instance->game_pos.player_y * 32);
+	}
+	if (direction == left)
+	{
+		mlx_put_image_to_window(game_instance->mlx_ptr, game_instance->win_ptr, game_instance->textures.floor, (game_instance->game_pos.player_x + 1) * 32, game_instance->game_pos.player_y * 32);
+		mlx_put_image_to_window(game_instance->mlx_ptr, game_instance->win_ptr, game_instance->textures.player_left, game_instance->game_pos.player_x * 32, game_instance->game_pos.player_y * 32);
+	}
+	if (direction == right)
+	{
+		mlx_put_image_to_window(game_instance->mlx_ptr, game_instance->win_ptr, game_instance->textures.floor, (game_instance->game_pos.player_x - 1) * 32, game_instance->game_pos.player_y * 32);
+		mlx_put_image_to_window(game_instance->mlx_ptr, game_instance->win_ptr, game_instance->textures.player_right, game_instance->game_pos.player_x * 32, game_instance->game_pos.player_y * 32);
+	}
+}
+
 void	display_case(t_game_instance *game_instance, int y, int x)
 {
 	if (game_instance->map.map[y][x] == '0')

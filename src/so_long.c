@@ -15,11 +15,16 @@
 
 static t_error	ft_init_game(t_game_instance *game_instance)
 {
+	int window_width;
+	int window_height;
+
+	window_width = 32 * (game_instance->map.width + 1);
+	window_height = 32 * game_instance->map.height;
 	game_instance->mlx_ptr = mlx_init();
 	if (!game_instance->mlx_ptr)
 		return (ERROR);
 	game_instance->win_ptr = mlx_new_window(game_instance->mlx_ptr, \
-	600, 400, "hi :)");
+	window_width, window_height, "hi :)");
 	if (!game_instance->win_ptr)
 		return (free(game_instance->mlx_ptr), ERROR);
 	return (NO_ERROR);

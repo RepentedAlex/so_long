@@ -13,14 +13,6 @@
 #include "libft.h"
 #include "so_long.h"
 
-int	key_hook_w(int keycode, t_game_instance *game_instance)
-{
-	(void)keycode;
-	(void)game_instance;
-	printf("Key pressed: %d\n", keycode);
-	return (0);
-}
-
 // Summon mlx_loop_end() in order to wrap up the game correctly
 int	exit_point(t_game_instance *game_instance)
 {
