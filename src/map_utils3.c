@@ -25,7 +25,7 @@ t_error	ft_check_top_bottom(t_map *map)
 	return (NO_ERROR);
 }
 
-t_error ft_find_exit(t_map *map, t_game_positions *game_pos)
+t_error	ft_find_exit(t_map *map, t_game_positions *game_pos)
 {
 	int	i;
 	int	j;

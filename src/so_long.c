@@ -18,7 +18,8 @@ static t_error	ft_init_game(t_game_instance *game_instance)
 	game_instance->mlx_ptr = mlx_init();
 	if (!game_instance->mlx_ptr)
 		return (ERROR);
-	game_instance->win_ptr = mlx_new_window(game_instance->mlx_ptr, 600, 400, "hi :)");
+	game_instance->win_ptr = mlx_new_window(game_instance->mlx_ptr, \
+	600, 400, "hi :)");
 	if (!game_instance->win_ptr)
 		return (free(game_instance->mlx_ptr), ERROR);
 	return (NO_ERROR);
@@ -31,7 +32,8 @@ static t_error	ft_texture_initialisation(t_game_instance *current)
 	return (NO_ERROR);
 }
 
-static t_error ft_map_initialisation(const char *filename, t_map *map, t_game_positions *game_pos)
+static t_error	ft_map_initialisation(const char *filename, t_map *map, \
+t_game_positions *game_pos)
 {
 	int	fd;
 
@@ -89,8 +91,10 @@ int	main(int argc, char *argv[])
 		return (3);
 	}
 	mlx_key_hook(current.win_ptr, controls, &current);
-	mlx_hook(current.win_ptr, 17, 1L<<0, exit_point, &current);
+	mlx_hook(current.win_ptr, 17, 1L << 0, exit_point, &current);
 	mlx_loop(current.mlx_ptr);
 	ft_destroyer(&current);
+	printf("Goodbye! :)\n");
 	return (0);
 }
+//TOO LONG

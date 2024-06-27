@@ -13,7 +13,7 @@
 #include "libft.h"
 #include "so_long.h"
 
-int key_hook_w(int keycode, t_game_instance *game_instance)
+int	key_hook_w(int keycode, t_game_instance *game_instance)
 {
 	(void)keycode;
 	(void)game_instance;
@@ -21,15 +21,25 @@ int key_hook_w(int keycode, t_game_instance *game_instance)
 	return (0);
 }
 
-int exit_point(t_game_instance *game_instance)
+// Summon mlx_loop_end() in order to wrap up the game correctly
+int	exit_point(t_game_instance *game_instance)
 {
 	mlx_loop_end(game_instance->mlx_ptr);
 	return (0);
 }
 
-int controls(int keycode, t_game_instance *game_instance)
+//Handles the different inputs
+int	controls(int keycode, t_game_instance *game_instance)
 {
 	if (keycode == XK_Escape)
 		exit_point(game_instance);
+	if (keycode == XK_w)
+		printf("You just pressed the W key!\n");
+	if (keycode == XK_s)
+		printf("You just pressed the S key!\n");
+	if (keycode == XK_a)
+		printf("You just pressed the A key!\n");
+	if (keycode == XK_d)
+		printf("You just pressed the D key!\n");
 	return (0);
 }

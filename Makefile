@@ -23,7 +23,7 @@ LFLAGS	=	-L./libs -lft -lmlx -lmlx_Linux -L/usr/lib -I./extras/minilibx-linux/ml
 FFLAGS	=	-fsanitize=address
 WFLAGS	=	-Wall -Wextra -Werror -g3
 CFLAGS	=	$(WFLAGS) $(IFLAGS)
-#CFLAGS	+=	$(FFLAGS)
+CFLAGS	+=	$(FFLAGS)
 SRC_DIR	=	src/
 BLD_DIR	=	build/
 LIBFT	=	extras/Libft
@@ -39,6 +39,7 @@ SRC_FILES	=	so_long \
 				map_utils2 \
 				map_utils3 \
 				map_utils4 \
+				movement \
 				textures
 SRC			=	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJ			=	$(addprefix $(BLD_DIR), $(addsuffix .o, $(SRC_FILES)))
