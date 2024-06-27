@@ -85,6 +85,14 @@ typedef struct s_game_instance
 	t_textures			textures;
 }						t_game_instance;
 
+typedef enum e_directions
+{
+	up,
+	down,
+	left,
+	right
+}	t_directions;
+
 t_error	ft_ber_to_array(int fd, t_map *map);
 t_error	ft_check_if_finishable(t_map *map);
 t_error	ft_check_items(t_map *map);
@@ -103,6 +111,9 @@ void	ft_free_map(t_map *map);
 char	*ft_get_to_last_line(t_map *map);
 t_error	ft_load_textures(t_game_instance *current);
 
+//-----Displaying-----
+void	draw_initial_state(t_game_instance *game_instance);
+
 int		exit_point(t_game_instance *game_instance);
 
 int		controls(int keycode, t_game_instance *game_instance);
@@ -117,5 +128,13 @@ t_error	ft_check_walls(const char *line);
 
 t_error	ft_is_charset(char c, int *c_count, int *e_count, int *p_count);
 void	ft_reset_char(char *c, int *c_count, int *r_exit);
+
+t_error	move_up(t_game_instance *game_instance);
+t_error	move_down(t_game_instance *game_instance);
+t_error	move_left(t_game_instance *game_instance);
+t_error	move_right(t_game_instance *game_instance);
+t_error	is_move_valid(t_game_instance *game_instance, t_directions direction);
+void	check_if_special(t_game_instance *game_instance, t_directions direction);
+t_error	is_walkable(t_game_instance *game_instance, t_directions direction);
 
 #endif

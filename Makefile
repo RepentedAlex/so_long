@@ -23,7 +23,7 @@ LFLAGS	=	-L./libs -lft -lmlx -lmlx_Linux -L/usr/lib -I./extras/minilibx-linux/ml
 FFLAGS	=	-fsanitize=address
 WFLAGS	=	-Wall -Wextra -Werror -g3
 CFLAGS	=	$(WFLAGS) $(IFLAGS)
-CFLAGS	+=	$(FFLAGS)
+#CFLAGS	+=	$(FFLAGS)
 SRC_DIR	=	src/
 BLD_DIR	=	build/
 LIBFT	=	extras/Libft
@@ -33,6 +33,7 @@ LIBFT	=	extras/Libft
 #############
 
 SRC_FILES	=	so_long \
+				display \
 				inputs_handler \
 				flood_fill \
 				map_utils \

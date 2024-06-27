@@ -34,12 +34,12 @@ int	controls(int keycode, t_game_instance *game_instance)
 	if (keycode == XK_Escape)
 		exit_point(game_instance);
 	if (keycode == XK_w)
-		printf("You just pressed the W key!\n");
+		move_up(game_instance);
 	if (keycode == XK_s)
-		printf("You just pressed the S key!\n");
+		move_down(game_instance);
 	if (keycode == XK_a)
-		printf("You just pressed the A key!\n");
+		move_left(game_instance);
 	if (keycode == XK_d)
-		printf("You just pressed the D key!\n");
+		move_right(game_instance);
 	return (0);
 }

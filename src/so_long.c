@@ -90,6 +90,7 @@ int	main(int argc, char *argv[])
 			free(current.map.map);
 		return (3);
 	}
+	draw_initial_state(&current);
 	mlx_key_hook(current.win_ptr, controls, &current);
 	mlx_hook(current.win_ptr, 17, 1L << 0, exit_point, &current);
 	mlx_loop(current.mlx_ptr);

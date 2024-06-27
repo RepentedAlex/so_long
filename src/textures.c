@@ -42,6 +42,12 @@ void	ft_free_textures(t_game_instance *game_instance)
 	if (game_instance->textures.floor != NULL)
 		ft_free_texture(game_instance->mlx_ptr, \
 		game_instance->textures.floor);
+	if (game_instance->textures.exit_close != NULL)
+		ft_free_texture(game_instance->mlx_ptr, \
+		game_instance->textures.exit_close);
+	if (game_instance->textures.exit_open != NULL)
+		ft_free_texture(game_instance->mlx_ptr, \
+		game_instance->textures.exit_open);
 }
 
 t_error	ft_load_textures(t_game_instance *current)
@@ -68,11 +74,17 @@ t_error	ft_load_textures(t_game_instance *current)
 	current->textures.floor = mlx_xpm_file_to_image(current->mlx_ptr, \
 	"./assets/floor.xpm", &current->textures.image_width, \
 	&current->textures.image_height);
+	current->textures.exit_close = mlx_xpm_file_to_image(current->mlx_ptr, \
+	"./assets/exit_close.xpm", &current->textures.image_width, \
+	&current->textures.image_height);
+	current->textures.exit_open = mlx_xpm_file_to_image(current->mlx_ptr, \
+	"./assets/exit_open.xpm", &current->textures.image_width, \
+	&current->textures.image_height);
 	if (!current->textures.player_up || !current->textures.player_down \
-	|| !current->textures.player_left || !current->textures.player_right)
-		return (ERROR);
-	if (!current->textures.collectible || !current->textures.wall \
-	|| !current->textures.floor)
+	|| !current->textures.player_left || !current->textures.player_right || \
+	!current->textures.collectible || !current->textures.wall \
+	|| !current->textures.floor || !current->textures.exit_close || \
+	!current->textures.exit_open)
 		return (ERROR);
 	printf("Textures loaded!\n");
 	return (NO_ERROR);
