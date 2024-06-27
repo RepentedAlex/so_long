@@ -12,7 +12,6 @@
 
 #include "libft.h"
 #include "so_long.h"
-#include "mlx_int.h"
 
 static void ft_free_texture(void *mlx_pointer, void *texture)
 {
