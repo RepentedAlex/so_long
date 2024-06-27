@@ -32,7 +32,7 @@
 
 typedef bool	t_error;
 
-// Stores all textures
+// Stores all txtrs
 typedef struct s_textures
 {
 	void		*collectible;
@@ -44,8 +44,8 @@ typedef struct s_textures
 	void		*exit_open;
 	void		*wall;
 	void		*floor;
-	int			image_width;
-	int			image_height;
+	int			wdth;
+	int			hght;
 }				t_textures;
 
 // Stores all data that is solely related to the map
@@ -82,7 +82,7 @@ typedef struct s_game_instance
 	t_game_positions	game_pos;
 	t_game_data			game_data;
 	t_map				map;
-	t_textures			textures;
+	t_textures			txtrs;
 }						t_game_instance;
 
 typedef enum e_directions
@@ -107,24 +107,38 @@ t_error	ft_find_player(t_map *map, t_game_positions *game_pos);
 void	ft_flood_fill(t_map *map, int minotaur_x, int minotaur_y);
 t_error	ft_flood_fill_handler(t_map *map, t_game_positions *game_pos);
 void	ft_free_map(t_map *map);
-//void	ft_free_textures(t_textures *textures);
+//void	ft_free_textures(t_textures *txtrs);
 char	*ft_get_to_last_line(t_map *map);
 t_error	ft_load_textures(t_game_instance *current);
 
 //-----Displaying-----
 void	draw_initial_state(t_game_instance *game_instance);
-void	update_display_after_move(t_game_instance *game_instance, t_directions direction);
+void	update_display_after_move(t_game_instance *g_i, t_directions direction);
 
+
+void	update_display_up(t_game_instance *g_i);
+void	update_display_down(t_game_instance *g_i);
+void	update_display_left(t_game_instance *g_i);
+void	update_display_right(t_game_instance *g_i);
 int		exit_point(t_game_instance *game_instance);
 
 int		controls(int keycode, t_game_instance *game_instance);
 
 void	ft_free_textures(t_game_instance *game_instance);
+t_error	ft_init_game(t_game_instance *game_instance);
+t_error	ft_texture_initialisation(t_game_instance *current);
+t_error	ft_map_initialisation(const char *filename, t_map *map, t_game_positions *game_pos);
 
 t_error	ft_check_file_is_ber(const char *filename);
 
+void check_case_up(t_game_instance *g_i);
+void check_case_down(t_game_instance *g_i);
+void check_case_left(t_game_instance *g_i);
+void check_case_right(t_game_instance *g_i);
 t_error	ft_check_map_exists(int *fd, const char *filename);
 
+void	ft_free_texture(void *mlx_pointer, void *texture);
+void	free_player_textures(t_game_instance *game_instance);
 t_error	ft_check_walls(const char *line);
 
 t_error	ft_is_charset(char c, int *c_count, int *e_count, int *p_count);
@@ -136,7 +150,7 @@ t_error	move_left(t_game_instance *game_instance);
 t_error	move_right(t_game_instance *game_instance);
 t_error	move_player(t_game_instance *game_instance, t_directions direction);
 t_error	is_move_valid(t_game_instance *game_instance, t_directions direction);
-void	check_if_special(t_game_instance *game_instance, t_directions direction);
+void	check_if_special(t_game_instance *g_i, t_directions dir);
 t_error	is_walkable(t_game_instance *game_instance, t_directions direction);
 void	draw_floor_or_exit(t_game_instance *game_instance);
 void	place_new_p(t_game_instance *game_instance, t_directions direction);

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   textures.c                                         :+:      :+:    :+:   */
+/*   txtrs.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apetitco <apetitco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,7 +13,7 @@
 #include "libft.h"
 #include "so_long.h"
 
-static void	ft_free_texture(void *mlx_pointer, void *texture)
+void	ft_free_texture(void *mlx_pointer, void *texture)
 {
 	mlx_destroy_image(mlx_pointer, texture);
 	texture = NULL;
@@ -22,71 +22,71 @@ static void	ft_free_texture(void *mlx_pointer, void *texture)
 //TOO MANY LINES
 void	ft_free_textures(t_game_instance *game_instance)
 {
-	if (game_instance->textures.player_up != NULL)
+	free_player_textures(game_instance);
+	if (game_instance->txtrs.collectible != NULL)
 		ft_free_texture(game_instance->mlx_ptr, \
-		game_instance->textures.player_up);
-	if (game_instance->textures.player_down != NULL)
+		game_instance->txtrs.collectible);
+	if (game_instance->txtrs.wall != NULL)
 		ft_free_texture(game_instance->mlx_ptr, \
-		game_instance->textures.player_down);
-	if (game_instance->textures.player_left != NULL)
+		game_instance->txtrs.wall);
+	if (game_instance->txtrs.floor != NULL)
 		ft_free_texture(game_instance->mlx_ptr, \
-		game_instance->textures.player_left);
-	if (game_instance->textures.player_right != NULL)
+		game_instance->txtrs.floor);
+	if (game_instance->txtrs.exit_close != NULL)
 		ft_free_texture(game_instance->mlx_ptr, \
-		game_instance->textures.player_right);
-	if (game_instance->textures.collectible != NULL)
+		game_instance->txtrs.exit_close);
+	if (game_instance->txtrs.exit_open != NULL)
 		ft_free_texture(game_instance->mlx_ptr, \
-		game_instance->textures.collectible);
-	if (game_instance->textures.wall != NULL)
-		ft_free_texture(game_instance->mlx_ptr, \
-		game_instance->textures.wall);
-	if (game_instance->textures.floor != NULL)
-		ft_free_texture(game_instance->mlx_ptr, \
-		game_instance->textures.floor);
-	if (game_instance->textures.exit_close != NULL)
-		ft_free_texture(game_instance->mlx_ptr, \
-		game_instance->textures.exit_close);
-	if (game_instance->textures.exit_open != NULL)
-		ft_free_texture(game_instance->mlx_ptr, \
-		game_instance->textures.exit_open);
+		game_instance->txtrs.exit_open);
 }
 
-//TOO MANY LINES
+t_error	ft_check_all_textures_loaded(t_textures *textures)
+{
+	if (!textures->player_up || !textures->player_down \
+	|| !textures->player_left || !textures->player_right || \
+	!textures->collectible || !textures->wall \
+	|| !textures->floor || !textures->exit_close || \
+	!textures->exit_open)
+		return (ERROR);
+	return (NO_ERROR);
+}
+
+void	load_player_textures(t_game_instance *gam_ins)
+{
+	gam_ins->txtrs.player_up = mlx_xpm_file_to_image(gam_ins->mlx_ptr, \
+	"./assets/back.xpm", &gam_ins->txtrs.wdth, \
+	&gam_ins->txtrs.hght);
+	gam_ins->txtrs.player_down = mlx_xpm_file_to_image(gam_ins->mlx_ptr, \
+	"./assets/front.xpm", &gam_ins->txtrs.wdth, \
+	&gam_ins->txtrs.hght);
+	gam_ins->txtrs.player_left = mlx_xpm_file_to_image(gam_ins->mlx_ptr, \
+	"./assets/left.xpm", &gam_ins->txtrs.wdth, \
+	&gam_ins->txtrs.hght);
+	gam_ins->txtrs.player_right = mlx_xpm_file_to_image(gam_ins->mlx_ptr, \
+	"./assets/right.xpm", &gam_ins->txtrs.wdth, \
+	&gam_ins->txtrs.hght);
+}
+
 t_error	ft_load_textures(t_game_instance *current)
 {
-	printf("Loading textures...\n");
-	current->textures.player_up = mlx_xpm_file_to_image(current->mlx_ptr, \
-	"./assets/back.xpm", &current->textures.image_width, \
-	&current->textures.image_height);
-	current->textures.player_down = mlx_xpm_file_to_image(current->mlx_ptr, \
-	"./assets/front.xpm", &current->textures.image_width, \
-	&current->textures.image_height);
-	current->textures.player_left = mlx_xpm_file_to_image(current->mlx_ptr, \
-	"./assets/left.xpm", &current->textures.image_width, \
-	&current->textures.image_height);
-	current->textures.player_right = mlx_xpm_file_to_image(current->mlx_ptr, \
-	"./assets/right.xpm", &current->textures.image_width, \
-	&current->textures.image_height);
-	current->textures.collectible = mlx_xpm_file_to_image(current->mlx_ptr, \
-	"./assets/collectible.xpm", &current->textures.image_width, \
-	&current->textures.image_height);
-	current->textures.wall = mlx_xpm_file_to_image(current->mlx_ptr, \
-	"./assets/wall.xpm", &current->textures.image_width, \
-	&current->textures.image_height);
-	current->textures.floor = mlx_xpm_file_to_image(current->mlx_ptr, \
-	"./assets/floor.xpm", &current->textures.image_width, \
-	&current->textures.image_height);
-	current->textures.exit_close = mlx_xpm_file_to_image(current->mlx_ptr, \
-	"./assets/exit_close.xpm", &current->textures.image_width, \
-	&current->textures.image_height);
-	current->textures.exit_open = mlx_xpm_file_to_image(current->mlx_ptr, \
-	"./assets/exit_open.xpm", &current->textures.image_width, \
-	&current->textures.image_height);
-	if (!current->textures.player_up || !current->textures.player_down \
-	|| !current->textures.player_left || !current->textures.player_right || \
-	!current->textures.collectible || !current->textures.wall \
-	|| !current->textures.floor || !current->textures.exit_close || \
-	!current->textures.exit_open)
+	printf("Loading txtrs...\n");
+	load_player_textures(current);
+	current->txtrs.collectible = mlx_xpm_file_to_image(current->mlx_ptr, \
+	"./assets/collectible.xpm", &current->txtrs.wdth, \
+	&current->txtrs.hght);
+	current->txtrs.wall = mlx_xpm_file_to_image(current->mlx_ptr, \
+	"./assets/wall.xpm", &current->txtrs.wdth, \
+	&current->txtrs.hght);
+	current->txtrs.floor = mlx_xpm_file_to_image(current->mlx_ptr, \
+	"./assets/floor.xpm", &current->txtrs.wdth, \
+	&current->txtrs.hght);
+	current->txtrs.exit_close = mlx_xpm_file_to_image(current->mlx_ptr, \
+	"./assets/exit_close.xpm", &current->txtrs.wdth, \
+	&current->txtrs.hght);
+	current->txtrs.exit_open = mlx_xpm_file_to_image(current->mlx_ptr, \
+	"./assets/exit_open.xpm", &current->txtrs.wdth, \
+	&current->txtrs.hght);
+	if (ft_check_all_textures_loaded(&current->txtrs))
 		return (ERROR);
 	printf("Textures loaded!\n");
 	return (NO_ERROR);

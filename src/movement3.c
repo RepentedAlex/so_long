@@ -57,3 +57,30 @@ t_error	is_move_valid(t_game_instance *game_instance, t_directions direction)
 			return (ERROR);
 	return (NO_ERROR);
 }
+
+void	check_case_down(t_game_instance *g_i)
+{
+	if (g_i->map.map[g_i->game_pos.player_y + 1][g_i->game_pos.player_x] \
+		== 'C')
+		g_i->game_data.collectibles_count++;
+	if (g_i->game_data.collectibles_count == g_i->map.collectibles)
+		g_i->game_data.exit_status = 1;
+}
+
+void	check_case_left(t_game_instance *g_i)
+{
+	if (g_i->map.map[g_i->game_pos.player_y][g_i->game_pos.player_x - 1] \
+		== 'C')
+		g_i->game_data.collectibles_count++;
+	if (g_i->game_data.collectibles_count == g_i->map.collectibles)
+		g_i->game_data.exit_status = 1;
+}
+
+void	check_case_right(t_game_instance *g_i)
+{
+	if (g_i->map.map[g_i->game_pos.player_y][g_i->game_pos.player_x + 1] \
+		== 'C')
+		g_i->game_data.collectibles_count++;
+	if (g_i->game_data.collectibles_count == g_i->map.collectibles)
+		g_i->game_data.exit_status = 1;
+}

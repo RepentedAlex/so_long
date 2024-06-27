@@ -34,6 +34,8 @@ LIBFT	=	extras/Libft
 
 SRC_FILES	=	so_long \
 				display \
+				display2 \
+				initialisation \
 				inputs_handler \
 				flood_fill \
 				map_utils \
@@ -43,7 +45,8 @@ SRC_FILES	=	so_long \
 				movement \
 				movement2 \
 				movement3 \
-				textures
+				textures \
+				textures2
 SRC			=	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJ			=	$(addprefix $(BLD_DIR), $(addsuffix .o, $(SRC_FILES)))
 OBJF		=	.cache_exists

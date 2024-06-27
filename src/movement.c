@@ -58,7 +58,7 @@ t_error	move_player(t_game_instance *game_instance, t_directions direction)
 	check_if_special(game_instance, direction);
 	if (game_instance->game_data.exit_status)
 		mlx_put_image_to_window(game_instance->mlx_ptr, \
-			game_instance->win_ptr, game_instance->textures.exit_open, \
+			game_instance->win_ptr, game_instance->txtrs.exit_open, \
 			game_instance->game_pos.exit_x * 32, \
 			game_instance->game_pos.exit_y * 32);
 	place_new_p(game_instance, direction);
@@ -75,42 +75,14 @@ t_error	move_player(t_game_instance *game_instance, t_directions direction)
 }
 
 //TOO MANY LINES
-void	check_if_special(t_game_instance *game_instance, t_directions direction)
+void	check_if_special(t_game_instance *g_i, t_directions dir)
 {
-	if (direction == up)
-	{
-		if (game_instance->map.map[game_instance->game_pos.player_y - 1] \
-		[game_instance->game_pos.player_x] == 'C')
-			game_instance->game_data.collectibles_count++;
-		if (game_instance->game_data.collectibles_count == \
-		game_instance->map.collectibles)
-			game_instance->game_data.exit_status = 1;
-	}
-	if (direction == down)
-	{
-		if (game_instance->map.map[game_instance->game_pos.player_y + 1] \
-		[game_instance->game_pos.player_x] == 'C')
-			game_instance->game_data.collectibles_count++;
-		if (game_instance->game_data.collectibles_count == \
-		game_instance->map.collectibles)
-			game_instance->game_data.exit_status = 1;
-	}
-	if (direction == left)
-	{
-		if (game_instance->map.map[game_instance->game_pos.player_y] \
-		[game_instance->game_pos.player_x - 1] == 'C')
-			game_instance->game_data.collectibles_count++;
-		if (game_instance->game_data.collectibles_count == \
-		game_instance->map.collectibles)
-			game_instance->game_data.exit_status = 1;
-	}
-	if (direction == right)
-	{
-		if (game_instance->map.map[game_instance->game_pos.player_y] \
-		[game_instance->game_pos.player_x + 1] == 'C')
-			game_instance->game_data.collectibles_count++;
-		if (game_instance->game_data.collectibles_count == \
-		game_instance->map.collectibles)
-			game_instance->game_data.exit_status = 1;
-	}
+	if (dir == up)
+		check_case_up(g_i);
+	if (dir == down)
+		check_case_down(g_i);
+	if (dir == left)
+		check_case_left(g_i);
+	if (dir == right)
+		check_case_right(g_i);
 }
