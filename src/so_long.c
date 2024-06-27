@@ -15,8 +15,8 @@
 
 static t_error	ft_init_game(t_game_instance *game_instance)
 {
-	int window_width;
-	int window_height;
+	int	window_width;
+	int	window_height;
 
 	window_width = 32 * (game_instance->map.width + 1);
 	window_height = 32 * game_instance->map.height;
@@ -74,6 +74,7 @@ void	ft_destroyer(t_game_instance *game_instance)
 	free(game_instance->map.map);
 }
 
+//TOO MANY LINES
 int	main(int argc, char *argv[])
 {
 	t_game_instance		current;
@@ -106,4 +107,3 @@ int	main(int argc, char *argv[])
 	printf("Goodbye! :)\n");
 	return (0);
 }
-//TOO LONG

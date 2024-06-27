@@ -19,6 +19,7 @@ static void	ft_free_texture(void *mlx_pointer, void *texture)
 	texture = NULL;
 }
 
+//TOO MANY LINES
 void	ft_free_textures(t_game_instance *game_instance)
 {
 	if (game_instance->textures.player_up != NULL)
@@ -50,6 +51,7 @@ void	ft_free_textures(t_game_instance *game_instance)
 		game_instance->textures.exit_open);
 }
 
+//TOO MANY LINES
 t_error	ft_load_textures(t_game_instance *current)
 {
 	printf("Loading textures...\n");
@@ -89,4 +91,3 @@ t_error	ft_load_textures(t_game_instance *current)
 	printf("Textures loaded!\n");
 	return (NO_ERROR);
 }
-//TOO LONG

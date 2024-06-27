@@ -134,8 +134,12 @@ t_error	move_up(t_game_instance *game_instance);
 t_error	move_down(t_game_instance *game_instance);
 t_error	move_left(t_game_instance *game_instance);
 t_error	move_right(t_game_instance *game_instance);
+t_error	move_player(t_game_instance *game_instance, t_directions direction);
 t_error	is_move_valid(t_game_instance *game_instance, t_directions direction);
 void	check_if_special(t_game_instance *game_instance, t_directions direction);
 t_error	is_walkable(t_game_instance *game_instance, t_directions direction);
+void	draw_floor_or_exit(t_game_instance *game_instance);
+void	place_new_p(t_game_instance *game_instance, t_directions direction);
+void	update_player_pos(int *player_y, int *player_x, t_directions direction);
 
 #endif

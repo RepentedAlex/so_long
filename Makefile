@@ -41,6 +41,8 @@ SRC_FILES	=	so_long \
 				map_utils3 \
 				map_utils4 \
 				movement \
+				movement2 \
+				movement3 \
 				textures
 SRC			=	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 OBJ			=	$(addprefix $(BLD_DIR), $(addsuffix .o, $(SRC_FILES)))
