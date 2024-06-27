@@ -12,31 +12,30 @@
 
 #include "libft.h"
 #include "so_long.h"
+#include "mlx_int.h"
 
-static void ft_free_texture(t_game_instance *game_instance, void *texture)
+static void ft_free_texture(void *mlx_pointer, void *texture)
 {
-	(void)game_instance;
-	mlx_destroy_image(game_instance, texture);
-	free(texture);
+	mlx_destroy_image(mlx_pointer, texture);
 	texture = NULL;
 }
 
 void	ft_free_textures(t_game_instance *game_instance)
 {
 	if (game_instance->textures.player_up != NULL)
-		ft_free_texture(game_instance, game_instance->textures.player_up);
+		ft_free_texture(game_instance->mlx_ptr, game_instance->textures.player_up);
 	if (game_instance->textures.player_down != NULL)
-		ft_free_texture(game_instance, game_instance->textures.player_down);
+		ft_free_texture(game_instance->mlx_ptr, game_instance->textures.player_down);
 	if (game_instance->textures.player_left != NULL)
-		ft_free_texture(game_instance, game_instance->textures.player_left);
+		ft_free_texture(game_instance->mlx_ptr, game_instance->textures.player_left);
 	if (game_instance->textures.player_right != NULL)
-		ft_free_texture(game_instance, game_instance->textures.player_right);
+		ft_free_texture(game_instance->mlx_ptr, game_instance->textures.player_right);
 	if (game_instance->textures.collectible != NULL)
-		ft_free_texture(game_instance, game_instance->textures.collectible);
+		ft_free_texture(game_instance->mlx_ptr, game_instance->textures.collectible);
 	if (game_instance->textures.wall != NULL)
-		ft_free_texture(game_instance, game_instance->textures.wall);
+		ft_free_texture(game_instance->mlx_ptr, game_instance->textures.wall);
 	if (game_instance->textures.floor != NULL)
-		ft_free_texture(game_instance, game_instance->textures.floor);
+		ft_free_texture(game_instance->mlx_ptr, game_instance->textures.floor);
 }
 
 t_error	ft_load_textures(t_game_instance *current)

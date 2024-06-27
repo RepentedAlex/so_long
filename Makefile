@@ -18,7 +18,7 @@ WHITE = \033[0;97m
 
 NAME	=	so_long
 CC		=	gcc
-IFLAGS	=	-Iinclude -I./extras/Libft/include
+IFLAGS	=	-Iinclude -I./extras/Libft/include -I./extras/minilibx-linux
 LFLAGS	=	-L./libs -lft -lmlx -lmlx_Linux -L/usr/lib -I./extras/minilibx-linux/mlx_linux -lXext -lX11 -lm -lz
 FFLAGS	=	-fsanitize=address
 WFLAGS	=	-Wall -Wextra -Werror -g3
