@@ -47,7 +47,10 @@ t_game_positions *game_pos)
 	if (ft_ber_to_array(fd, map))
 		return (printf("Error: Couldn't convert map to 2D array.\n"), ERROR);
 	if (ft_check_map_is_rectangular(map))
+	{
+		ft_free_map(map);
 		return (ERROR);
+	}
 	if (ft_check_map_is_enclosed(map))
 		return (ERROR);
 	if (ft_check_items(map))

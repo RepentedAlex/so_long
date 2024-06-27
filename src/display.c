@@ -16,22 +16,34 @@ void	update_display_after_move(t_game_instance *game_instance, t_directions dire
 {
 	if (direction == up)
 	{
-		mlx_put_image_to_window(game_instance->mlx_ptr, game_instance->win_ptr, game_instance->textures.floor, game_instance->game_pos.player_x * 32, (game_instance->game_pos.player_y + 1) * 32);
+		if (game_instance->game_pos.player_y + 1 == game_instance->game_pos.exit_y && game_instance->game_pos.player_x == game_instance->game_pos.exit_x)
+			mlx_put_image_to_window(game_instance->mlx_ptr, game_instance->win_ptr, game_instance->textures.exit_close, game_instance->game_pos.player_x * 32, (game_instance->game_pos.player_y + 1) * 32);
+		else
+			mlx_put_image_to_window(game_instance->mlx_ptr, game_instance->win_ptr, game_instance->textures.floor, game_instance->game_pos.player_x * 32, (game_instance->game_pos.player_y + 1) * 32);
 		mlx_put_image_to_window(game_instance->mlx_ptr, game_instance->win_ptr, game_instance->textures.player_up, game_instance->game_pos.player_x * 32, game_instance->game_pos.player_y * 32);
 	}
 	if (direction == down)
 	{
-		mlx_put_image_to_window(game_instance->mlx_ptr, game_instance->win_ptr, game_instance->textures.floor, game_instance->game_pos.player_x * 32, (game_instance->game_pos.player_y - 1) * 32);
+		if (game_instance->game_pos.player_y - 1 == game_instance->game_pos.exit_y && game_instance->game_pos.player_x == game_instance->game_pos.exit_x)
+			mlx_put_image_to_window(game_instance->mlx_ptr, game_instance->win_ptr, game_instance->textures.exit_close, game_instance->game_pos.player_x * 32, (game_instance->game_pos.player_y - 1) * 32);
+		else
+			mlx_put_image_to_window(game_instance->mlx_ptr, game_instance->win_ptr, game_instance->textures.floor, game_instance->game_pos.player_x * 32, (game_instance->game_pos.player_y - 1) * 32);
 		mlx_put_image_to_window(game_instance->mlx_ptr, game_instance->win_ptr, game_instance->textures.player_down, game_instance->game_pos.player_x * 32, game_instance->game_pos.player_y * 32);
 	}
 	if (direction == left)
 	{
-		mlx_put_image_to_window(game_instance->mlx_ptr, game_instance->win_ptr, game_instance->textures.floor, (game_instance->game_pos.player_x + 1) * 32, game_instance->game_pos.player_y * 32);
+		if (game_instance->game_pos.player_y == game_instance->game_pos.exit_y && game_instance->game_pos.player_x + 1 == game_instance->game_pos.exit_x)
+			mlx_put_image_to_window(game_instance->mlx_ptr, game_instance->win_ptr, game_instance->textures.exit_close, (game_instance->game_pos.player_x + 1) * 32, game_instance->game_pos.player_y * 32);
+		else
+			mlx_put_image_to_window(game_instance->mlx_ptr, game_instance->win_ptr, game_instance->textures.floor, (game_instance->game_pos.player_x + 1) * 32, game_instance->game_pos.player_y * 32);
 		mlx_put_image_to_window(game_instance->mlx_ptr, game_instance->win_ptr, game_instance->textures.player_left, game_instance->game_pos.player_x * 32, game_instance->game_pos.player_y * 32);
 	}
 	if (direction == right)
 	{
-		mlx_put_image_to_window(game_instance->mlx_ptr, game_instance->win_ptr, game_instance->textures.floor, (game_instance->game_pos.player_x - 1) * 32, game_instance->game_pos.player_y * 32);
+		if (game_instance->game_pos.player_y == game_instance->game_pos.exit_y && game_instance->game_pos.player_x - 1 == game_instance->game_pos.exit_x)
+			mlx_put_image_to_window(game_instance->mlx_ptr, game_instance->win_ptr, game_instance->textures.exit_close, (game_instance->game_pos.player_x - 1) * 32, game_instance->game_pos.player_y * 32);
+		else
+			mlx_put_image_to_window(game_instance->mlx_ptr, game_instance->win_ptr, game_instance->textures.floor, (game_instance->game_pos.player_x - 1) * 32, game_instance->game_pos.player_y * 32);
 		mlx_put_image_to_window(game_instance->mlx_ptr, game_instance->win_ptr, game_instance->textures.player_right, game_instance->game_pos.player_x * 32, game_instance->game_pos.player_y * 32);
 	}
 }

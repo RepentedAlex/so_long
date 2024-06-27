@@ -74,7 +74,7 @@ void	ft_free_map(t_map *map)
 	if (!map)
 		return ;
 	i = 0;
-	while (i < map->height)
+	while (map->map[i])
 	{
 		free(map->map[i]);
 		i++;

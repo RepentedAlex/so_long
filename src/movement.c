@@ -36,13 +36,21 @@ void	place_new_p(t_game_instance *game_instance, t_directions direction)
 		game_instance->map.map[game_instance->game_pos.player_y][game_instance->game_pos.player_x + 1] = 'P';
 }
 
+void	draw_floor_or_exit(t_game_instance *game_instance)
+{
+	if (game_instance->game_pos.player_y == game_instance->game_pos.exit_y && game_instance->game_pos.player_x == game_instance->game_pos.exit_x)
+		game_instance->map.map[game_instance->game_pos.player_y][game_instance->game_pos.player_x] = 'E';
+	else
+		game_instance->map.map[game_instance->game_pos.player_y][game_instance->game_pos.player_x] = '0';
+}
+
 t_error move_player(t_game_instance *game_instance, t_directions direction)
 {
 	if (is_move_valid(game_instance, direction))
 		return (ERROR);
 	check_if_special(game_instance, direction);
 	place_new_p(game_instance, direction);
-	game_instance->map.map[game_instance->game_pos.player_y][game_instance->game_pos.player_x] = '0';
+	draw_floor_or_exit(game_instance);
 	update_player_pos(&game_instance->game_pos.player_y, &game_instance->game_pos.player_x, direction);
 	printf("Player is on [y]%d, [x]%d\n", game_instance->game_pos.player_y, game_instance->game_pos.player_x);
 	update_display_after_move(game_instance, direction);
@@ -96,29 +104,29 @@ t_error	is_walkable(t_game_instance *game_instance, t_directions direction)
 	{
 		if (game_instance->map.map[game_instance->game_pos.player_y - 1][game_instance->game_pos.player_x] == '1')
 			return (ERROR);
-		if (game_instance->game_data.exit_status == 0 && !is_exit(game_instance, game_instance->game_pos.player_y - 1, game_instance->game_pos.player_x))
-			return (ERROR);
+//		if (game_instance->game_data.exit_status == 0 && !is_exit(game_instance, game_instance->game_pos.player_y - 1, game_instance->game_pos.player_x))
+//			return (ERROR);
 	}
 	if (direction == down)
 	{
 		if (game_instance->map.map[game_instance->game_pos.player_y + 1][game_instance->game_pos.player_x] == '1')
 			return (ERROR);
-		if (game_instance->game_data.exit_status == 0 && !is_exit(game_instance, game_instance->game_pos.player_y + 1, game_instance->game_pos.player_x))
-			return (ERROR);
+//		if (game_instance->game_data.exit_status == 0 && !is_exit(game_instance, game_instance->game_pos.player_y + 1, game_instance->game_pos.player_x))
+//			return (ERROR);
 	}
 	if (direction == left)
 	{
 		if (game_instance->map.map[game_instance->game_pos.player_y][game_instance->game_pos.player_x - 1] == '1')
 			return (ERROR);
-		if (game_instance->game_data.exit_status == 0 && !is_exit(game_instance, game_instance->game_pos.player_y, game_instance->game_pos.player_x - 1))
-			return (ERROR);
+//		if (game_instance->game_data.exit_status == 0 && !is_exit(game_instance, game_instance->game_pos.player_y, game_instance->game_pos.player_x - 1))
+//			return (ERROR);
 	}
 	if (direction == right)
 	{
 		if (game_instance->map.map[game_instance->game_pos.player_y][game_instance->game_pos.player_x + 1] == '1')
 			return (ERROR);
-		if (game_instance->game_data.exit_status == 0 && !is_exit(game_instance, game_instance->game_pos.player_y, game_instance->game_pos.player_x + 1))
-			return (ERROR);
+//		if (game_instance->game_data.exit_status == 0 && !is_exit(game_instance, game_instance->game_pos.player_y, game_instance->game_pos.player_x + 1))
+//			return (ERROR);
 	}
 	return (NO_ERROR);
 }
@@ -144,7 +152,7 @@ t_error	move_up(t_game_instance *game_instance)
 {
 	if (move_player(game_instance, up))
 		return (ERROR);
-	if (game_instance->game_pos.player_x == game_instance->game_pos.exit_x && game_instance->game_pos.player_y == game_instance->game_pos.exit_y)
+	if (game_instance->game_data.exit_status && game_instance->game_pos.player_x == game_instance->game_pos.exit_x && game_instance->game_pos.player_y == game_instance->game_pos.exit_y)
 		exit_point(game_instance);
 	return (NO_ERROR);
 }
@@ -153,7 +161,7 @@ t_error	move_down(t_game_instance *game_instance)
 {
 	if (move_player(game_instance, down))
 		return (ERROR);
-	if (game_instance->game_pos.player_x == game_instance->game_pos.exit_x && game_instance->game_pos.player_y == game_instance->game_pos.exit_y)
+	if (game_instance->game_data.exit_status && game_instance->game_pos.player_x == game_instance->game_pos.exit_x && game_instance->game_pos.player_y == game_instance->game_pos.exit_y)
 		exit_point(game_instance);
 	return (NO_ERROR);
 }
@@ -162,7 +170,7 @@ t_error	move_left(t_game_instance *game_instance)
 {
 	if (move_player(game_instance, left))
 		return (ERROR);
-	if (game_instance->game_pos.player_x == game_instance->game_pos.exit_x && game_instance->game_pos.player_y == game_instance->game_pos.exit_y)
+	if (game_instance->game_data.exit_status && game_instance->game_pos.player_x == game_instance->game_pos.exit_x && game_instance->game_pos.player_y == game_instance->game_pos.exit_y)
 		exit_point(game_instance);
 	return (NO_ERROR);
 }
@@ -171,7 +179,7 @@ t_error	move_right(t_game_instance *game_instance)
 {
 	if (move_player(game_instance, right))
 		return (ERROR);
-	if (game_instance->game_pos.player_x == game_instance->game_pos.exit_x && game_instance->game_pos.player_y == game_instance->game_pos.exit_y)
+	if (game_instance->game_data.exit_status && game_instance->game_pos.player_x == game_instance->game_pos.exit_x && game_instance->game_pos.player_y == game_instance->game_pos.exit_y)
 		exit_point(game_instance);
 	return (NO_ERROR);
 }
