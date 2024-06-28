@@ -22,7 +22,7 @@ t_error	ft_is_charset(char c, int *c_count, int *e_count, int *p_count)
 	else if (c == 'P')
 		*p_count += 1;
 	else if (c != '0' && c != '1')
-		return (ft_printf("Error: Invalid characters detected on map.\n"), ERROR);
+		return (ft_printf("Error: Invalid characters on map.\n"), ERROR);
 	return (NO_ERROR);
 }
 

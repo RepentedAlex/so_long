@@ -12,7 +12,7 @@
 
 #include "so_long.h"
 
-void	free_player_textures(t_game_instance *game_instance)
+void	ft_free_player_textures(t_game_instance *game_instance)
 {
 	if (game_instance->txtrs.player_up != NULL)
 		ft_free_texture(game_instance->mlx_ptr, \

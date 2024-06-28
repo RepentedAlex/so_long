@@ -18,7 +18,7 @@ t_error	ft_big_init(t_game_instance *g_i, char *argv[])
 {
 	if (ft_check_file_is_ber(argv[1]))
 		return (ERROR);
-	if (ft_map_initialisation(argv[1], &g_i->map, &g_i->game_pos))
+	if (ft_map_init(argv[1], &g_i->map, &g_i->game_pos))
 	{
 		if (g_i->map.map)
 			ft_free_map(&g_i->map);

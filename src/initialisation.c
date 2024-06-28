@@ -37,12 +37,12 @@ t_error	ft_texture_initialisation(t_game_instance *current)
 	return (NO_ERROR);
 }
 
-t_error	ft_map_initialisation(const char *filename, t_map *map, \
+t_error	ft_map_init(const char *f_name, t_map *map, \
 t_game_positions *game_pos)
 {
 	int	fd;
 
-	if (ft_check_map_exists(&fd, filename))
+	if (ft_check_map_exists(&fd, f_name))
 		return (ERROR);
 	if (ft_ber_to_array(fd, map))
 		return (ft_printf("Error: Couldn't convert map to 2D array.\n"), ERROR);

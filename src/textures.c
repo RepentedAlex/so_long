@@ -19,10 +19,9 @@ void	ft_free_texture(void *mlx_pointer, void *texture)
 	texture = NULL;
 }
 
-//TOO MANY LINES
 void	ft_free_textures(t_game_instance *game_instance)
 {
-	free_player_textures(game_instance);
+	ft_free_player_textures(game_instance);
 	if (game_instance->txtrs.collectible != NULL)
 		ft_free_texture(game_instance->mlx_ptr, \
 		game_instance->txtrs.collectible);
