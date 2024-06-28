@@ -22,7 +22,7 @@ t_error	ft_big_init(t_game_instance *g_i, char *argv[])
 	{
 		if (g_i->map.map)
 			ft_free_map(&g_i->map);
-		return (2);
+		return (ERROR);
 	}
 	if (ft_init_game(g_i))
 		return (ERROR);
@@ -30,7 +30,7 @@ t_error	ft_big_init(t_game_instance *g_i, char *argv[])
 	{
 		if (g_i->map.map)
 			free(g_i->map.map);
-		return (3);
+		return (ERROR);
 	}
 	draw_initial_state(g_i);
 	return (NO_ERROR);
