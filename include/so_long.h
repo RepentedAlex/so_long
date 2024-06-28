@@ -97,6 +97,7 @@ typedef enum e_directions
 
 //-----initialisers & exit point-----//
 int		exit_point(t_game_instance *game_instance);
+void	ft_destroyer(t_game_instance *game_instance);
 t_error	ft_init_game(t_game_instance *game_instance);
 t_error	ft_map_init(const char *f_name, t_map *map, t_game_positions *game_pos);
 t_error	ft_texture_initialisation(t_game_instance *current);
@@ -124,6 +125,7 @@ t_error	ft_flood_fill_handler(t_map *map, t_game_positions *game_pos);
 void	ft_reset_char(char *c, int *c_count, int *r_exit);
 
 //-----textures-----//
+t_error	ft_check_all_textures_loaded(t_game_instance *g_i);
 t_error	ft_load_textures(t_game_instance *current);
 void	ft_free_player_textures(t_game_instance *game_instance);
 void	ft_free_textures(t_game_instance *game_instance);

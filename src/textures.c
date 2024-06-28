@@ -39,13 +39,13 @@ void	ft_free_textures(t_game_instance *game_instance)
 		game_instance->txtrs.exit_open);
 }
 
-t_error	ft_check_all_textures_loaded(t_textures *textures)
+t_error	ft_check_all_textures_loaded(t_game_instance *g_i)
 {
-	if (!textures->player_up || !textures->player_down \
-	|| !textures->player_left || !textures->player_right || \
-	!textures->collectible || !textures->wall \
-	|| !textures->floor || !textures->exit_close || \
-	!textures->exit_open)
+	if (!g_i->txtrs.player_up || !g_i->txtrs.player_down \
+	|| !g_i->txtrs.player_left || !g_i->txtrs.player_right || \
+	!g_i->txtrs.collectible || !g_i->txtrs.wall \
+	|| !g_i->txtrs.floor || !g_i->txtrs.exit_close || \
+	!g_i->txtrs.exit_open)
 		return (ERROR);
 	return (NO_ERROR);
 }
@@ -84,7 +84,7 @@ t_error	ft_load_textures(t_game_instance *current)
 	current->txtrs.exit_open = mlx_xpm_file_to_image(current->mlx_ptr, \
 	"./assets/exit_open.xpm", &current->txtrs.wdth, \
 	&current->txtrs.hght);
-	if (ft_check_all_textures_loaded(&current->txtrs))
-		return (ERROR);
+	if (ft_check_all_textures_loaded(current))
+		return (ft_destroyer(current), ERROR);
 	return (NO_ERROR);
 }
