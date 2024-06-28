@@ -6,7 +6,7 @@
 /*   By: apetitco <apetitco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 14:42:57 by apetitco          #+#    #+#             */
-/*   Updated: 2024/06/25 18:14:53 by apetitco         ###   ########.fr       */
+/*   Updated: 2024/06/28 14:15:48 by apetitco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ int	main(int argc, char *argv[])
 	ft_bzero(&current, sizeof(current));
 	if (argc != 2)
 		return (1);
-	ft_big_init(&current, argv);
+	if (ft_big_init(&current, argv))
+		return 0;
 	mlx_key_hook(current.win_ptr, controls, &current);
 	mlx_hook(current.win_ptr, 17, 1L << 0, exit_point, &current);
 	mlx_loop(current.mlx_ptr);

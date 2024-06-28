@@ -23,7 +23,7 @@ t_error	ft_init_game(t_game_instance *game_instance)
 	if (!game_instance->mlx_ptr)
 		return (ERROR);
 	game_instance->win_ptr = mlx_new_window(game_instance->mlx_ptr, \
-	window_width, window_height, "hi :)");
+	window_width, window_height, "MOTOMAMI");
 	if (!game_instance->win_ptr)
 		return (free(game_instance->mlx_ptr), ERROR);
 	return (NO_ERROR);

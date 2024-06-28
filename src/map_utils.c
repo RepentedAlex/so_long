@@ -6,7 +6,7 @@
 /*   By: apetitco <apetitco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 10:33:10 by apetitco          #+#    #+#             */
-/*   Updated: 2024/06/21 17:10:57 by apetitco         ###   ########.fr       */
+/*   Updated: 2024/06/28 14:20:35 by apetitco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ t_error	ft_ber_to_array(int fd, t_map *map)
 
 	ft_bzero(buffer, sizeof(buffer));
 	file = ft_strdup("");
+	if (!file)
+		return (ERROR);
 	bytes_read = read(fd, buffer, BUFFER_SIZE);
 	if (bytes_read <= 0)
 		return (ERROR);
@@ -28,11 +30,15 @@ t_error	ft_ber_to_array(int fd, t_map *map)
 	{
 		buffer[bytes_read] = 0;
 		file = ft_strjoin(file, buffer);
+		if (!file)
+			return (ERROR);
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
 	}
 	if (bytes_read < 0)
 		return (free(file), ERROR);
 	map->map = ft_split(file, '\n');
+	if (!map->map)
+		return (ERROR);
 	free(file);
 	printf("Map converted successfully!\n");
 	return (close(fd), NO_ERROR);
