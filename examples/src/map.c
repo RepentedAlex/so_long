@@ -187,7 +187,8 @@ t_error	ft_check_map_exists(int *fd, const char *filename)
 
 	if (fd == NULL || filename == NULL)
 		return (ERROR);
-	ret = open(filename, O_RDONLY);
+	ret = open(filename, O_RDWR);
+	if (errno == EISDIR)
 	if (ret == -1)
 		return (printf("CPT mec :(((\n"), ERROR);
 	printf("Map loaded successfully!\n");

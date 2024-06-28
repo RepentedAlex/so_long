@@ -6,7 +6,7 @@
 /*   By: apetitco <apetitco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/21 11:05:37 by apetitco          #+#    #+#             */
-/*   Updated: 2024/06/21 15:46:54 by apetitco         ###   ########.fr       */
+/*   Updated: 2024/06/28 14:35:06 by apetitco         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_error	ft_check_map_exists(int *fd, const char *filename)
 		return (ERROR);
 	ret = open(filename, O_RDONLY);
 	if (ret == -1)
-		return (printf("Error : Couldn't open map file.\n"));
+		return (printf("Error : Couldn't open map file.\n"), ERROR);
 	printf("Map loaded successfully!\n");
 	*fd = ret;
 	return (NO_ERROR);

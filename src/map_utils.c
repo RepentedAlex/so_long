@@ -25,7 +25,7 @@ t_error	ft_ber_to_array(int fd, t_map *map)
 		return (ERROR);
 	bytes_read = read(fd, buffer, BUFFER_SIZE);
 	if (bytes_read <= 0)
-		return (ERROR);
+		return (free(file), ERROR);
 	while (bytes_read > 0)
 	{
 		buffer[bytes_read] = 0;
