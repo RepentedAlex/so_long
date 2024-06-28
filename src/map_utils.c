@@ -39,9 +39,7 @@ t_error	ft_ber_to_array(int fd, t_map *map)
 	map->map = ft_split(file, '\n');
 	if (!map->map)
 		return (ERROR);
-	free(file);
-	printf("Map converted successfully!\n");
-	return (close(fd), NO_ERROR);
+	return (free(file), close(fd), NO_ERROR);
 }
 
 t_error	ft_check_file_is_ber(const char *filename)

@@ -57,7 +57,7 @@ int	main(int argc, char *argv[])
 	if (argc != 2)
 		return (1);
 	if (ft_big_init(&current, argv))
-		return 0;
+		return (2);
 	mlx_key_hook(current.win_ptr, controls, &current);
 	mlx_hook(current.win_ptr, 17, 1L << 0, exit_point, &current);
 	mlx_loop(current.mlx_ptr);
