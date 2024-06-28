@@ -21,7 +21,7 @@ CC		=	gcc
 IFLAGS	=	-Iinclude -I./extras/Libft/include -I./extras/minilibx-linux -I./extras/ft_printf/include
 LFLAGS	=	-L./libs -lftprintf -lmlx -lmlx_Linux -L/usr/lib -I./extras/minilibx-linux/mlx_linux -lXext -lX11 -lm -lz
 FFLAGS	=	-fsanitize=address
-WFLAGS	=	-Wall -Wextra -Werror -g3
+WFLAGS	=	-Wall -Wextra -Werror -g3 -MMD
 CFLAGS	=	$(WFLAGS) $(IFLAGS)
 #CFLAGS	+=	$(FFLAGS)
 SRC_DIR	=	src/
@@ -78,7 +78,6 @@ $(OBJF):
 	@echo "$(BLUE)Object directory created!$(DEF_COLOR)"
 
 clean:
-#	@make clean -C $(LIBFT) --no-print-directory
 	@make clean -C $(PRINTF) --no-print-directory
 	@cd extras/minilibx-linux/ && ./configure clean
 	@rm -rf $(BLD_DIR) $(OBJF)
@@ -90,5 +89,7 @@ fclean:	clean
 	@echo "$(MAGENTA)$(NAME) cleaned!$(DEF_COLOR)"
 
 re:	fclean all
+
+-include $(OBJS:%.o=%.d)
 
 .PHONY:	all clean fclean re
