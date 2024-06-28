@@ -28,10 +28,6 @@ t_error	ft_find_player(t_map *map, t_game_positions *game_pos)
 			{
 				game_pos->player_x = j;
 				game_pos->player_y = i;
-				printf("Player is located on [y]%d, [x]%d\n", \
-				game_pos->player_y, game_pos->player_x);
-				printf("Is this a P-> %c ?\n", \
-				map->map[game_pos->player_y][game_pos->player_x]);
 				return (NO_ERROR);
 			}
 			j++;

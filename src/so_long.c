@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "ft_printf.h"
 #include "so_long.h"
 
 t_error	ft_big_init(t_game_instance *g_i, char *argv[])
@@ -37,7 +38,6 @@ t_error	ft_big_init(t_game_instance *g_i, char *argv[])
 
 void	ft_destroyer(t_game_instance *game_instance)
 {
-	printf("Exiting...\n");
 	ft_free_textures(game_instance);
 	if (game_instance->win_ptr)
 		mlx_destroy_window(game_instance->mlx_ptr, game_instance->win_ptr);
@@ -62,6 +62,6 @@ int	main(int argc, char *argv[])
 	mlx_hook(current.win_ptr, 17, 1L << 0, exit_point, &current);
 	mlx_loop(current.mlx_ptr);
 	ft_destroyer(&current);
-	printf("Goodbye! :)\n");
+	ft_printf("Goodbye! :)\n");
 	return (0);
 }

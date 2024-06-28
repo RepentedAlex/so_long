@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_printf.h"
 #include "so_long.h"
 
 t_error	ft_init_game(t_game_instance *game_instance)
@@ -23,7 +24,7 @@ t_error	ft_init_game(t_game_instance *game_instance)
 	if (!game_instance->mlx_ptr)
 		return (ERROR);
 	game_instance->win_ptr = mlx_new_window(game_instance->mlx_ptr, \
-	window_width, window_height, "MOTOMAMI");
+	window_width, window_height, "MOTOMAMI: THE GAME");
 	if (!game_instance->win_ptr)
 		return (free(game_instance->mlx_ptr), ERROR);
 	return (NO_ERROR);
@@ -44,7 +45,7 @@ t_game_positions *game_pos)
 	if (ft_check_map_exists(&fd, filename))
 		return (ERROR);
 	if (ft_ber_to_array(fd, map))
-		return (printf("Error: Couldn't convert map to 2D array.\n"), ERROR);
+		return (ft_printf("Error: Couldn't convert map to 2D array.\n"), ERROR);
 	if (ft_check_map_is_rectangular(map))
 	{
 		ft_free_map(map);

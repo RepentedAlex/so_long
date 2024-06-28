@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 #include "so_long.h"
 
 t_error	ft_is_charset(char c, int *c_count, int *e_count, int *p_count)
@@ -22,7 +22,7 @@ t_error	ft_is_charset(char c, int *c_count, int *e_count, int *p_count)
 	else if (c == 'P')
 		*p_count += 1;
 	else if (c != '0' && c != '1')
-		return (printf("Error: Invalid characters detected on map.\n"), ERROR);
+		return (ft_printf("Error: Invalid characters detected on map.\n"), ERROR);
 	return (NO_ERROR);
 }
 

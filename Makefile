@@ -18,8 +18,8 @@ WHITE = \033[0;97m
 
 NAME	=	so_long
 CC		=	gcc
-IFLAGS	=	-Iinclude -I./extras/Libft/include -I./extras/minilibx-linux
-LFLAGS	=	-L./libs -lft -lmlx -lmlx_Linux -L/usr/lib -I./extras/minilibx-linux/mlx_linux -lXext -lX11 -lm -lz
+IFLAGS	=	-Iinclude -I./extras/Libft/include -I./extras/minilibx-linux -I./extras/ft_printf/include
+LFLAGS	=	-L./libs -lftprintf -lmlx -lmlx_Linux -L/usr/lib -I./extras/minilibx-linux/mlx_linux -lXext -lX11 -lm -lz
 FFLAGS	=	-fsanitize=address
 WFLAGS	=	-Wall -Wextra -Werror -g3
 CFLAGS	=	$(WFLAGS) $(IFLAGS)
@@ -27,6 +27,7 @@ CFLAGS	=	$(WFLAGS) $(IFLAGS)
 SRC_DIR	=	src/
 BLD_DIR	=	build/
 LIBFT	=	extras/Libft
+PRINTF	=	extras/ft_printf
 
 #############
 ## SOURCES ##
@@ -58,6 +59,10 @@ OBJF		=	.cache_exists
 all:	$(NAME)
 
 $(NAME):	$(OBJ)
+	@make -C $(PRINTF) --no-print-directory
+	@mv $(PRINTF)/libftprintf.a ./libs
+	@cd extras/minilibx-linux/ && ./configure
+	@mv ./extras/minilibx-linux/libmlx.a ./extras/minilibx-linux/libmlx_Linux.a ./libs
 	@echo "$(BLUE)Linking $<$(DEF_COLOR)"
 	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LFLAGS)
 	@echo "$(GREEN)$< linked !$(DEF_COLOR)"
@@ -73,10 +78,14 @@ $(OBJF):
 	@echo "$(BLUE)Object directory created!$(DEF_COLOR)"
 
 clean:
+#	@make clean -C $(LIBFT) --no-print-directory
+	@make clean -C $(PRINTF) --no-print-directory
+	@cd extras/minilibx-linux/ && ./configure clean
 	@rm -rf $(BLD_DIR) $(OBJF)
 	@echo "$(MAGENTA)Build files cleaned!$(DEF_COLOR)"
 
 fclean:	clean
+	@rm -f ./libs/libftprintf.a ./libs/libmlx.a ./libs/libmlx_Linux.a
 	@rm -f $(NAME)
 	@echo "$(MAGENTA)$(NAME) cleaned!$(DEF_COLOR)"
 

@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "ft_printf.h"
 #include "so_long.h"
 
 t_error	ft_ber_to_array(int fd, t_map *map)
@@ -45,8 +46,8 @@ t_error	ft_ber_to_array(int fd, t_map *map)
 t_error	ft_check_file_is_ber(const char *filename)
 {
 	if (ft_strncmp(ft_strrchr(filename, '.'), ".ber", 4))
-		return (printf("Error: File provided is not a *.ber file.\n"), ERROR);
-	return (printf("File provided is correct (*.ber)!\n"), NO_ERROR);
+		return (ft_printf("Error: File provided is not a *.ber file.\n"), ERROR);
+	return (NO_ERROR);
 }
 
 t_error	ft_check_if_finishable(t_map *map)
@@ -74,8 +75,8 @@ t_error	ft_check_if_finishable(t_map *map)
 		i++;
 	}
 	if (count_collectibles != map->collectibles || !reach_exit)
-		return (printf("Error: Map is not completable.\n"), ERROR);
-	return (printf("Map is completable!\n"), NO_ERROR);
+		return (ft_printf("Error: Map is not completable.\n"), ERROR);
+	return (NO_ERROR);
 }
 
 t_error	ft_check_items(t_map *map)
@@ -86,8 +87,8 @@ t_error	ft_check_items(t_map *map)
 
 	if (ft_check_items_internal(map, &collectibles_count, \
 	&exit_count, &player_count))
-		return (printf("Error: Invalid character detected.\n"), ERROR);
+		return (ft_printf("Error: Invalid character detected.\n"), ERROR);
 	if (exit_count != 1 || player_count != 1)
-		return (printf("Error: Too many player.s or exit.s.\n"), ERROR);
-	return (printf("Correct number of player and exit!\n"), NO_ERROR);
+		return (ft_printf("Error: Too many player.s or exit.s.\n"), ERROR);
+	return (NO_ERROR);
 }

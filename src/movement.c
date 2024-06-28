@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ft_printf.h"
 #include "so_long.h"
 
 void	update_player_pos(int *player_y, int *player_x, t_directions direction)
@@ -65,12 +66,9 @@ t_error	move_player(t_game_instance *game_instance, t_directions direction)
 	draw_floor_or_exit(game_instance);
 	update_player_pos(&game_instance->game_pos.player_y, \
 	&game_instance->game_pos.player_x, direction);
-	printf("Player is on [y]%d, [x]%d\n", \
-	game_instance->game_pos.player_y, \
-	game_instance->game_pos.player_x);
 	update_display_after_move(game_instance, direction);
 	game_instance->game_data.movements_count++;
-	printf("%d movements\n", game_instance->game_data.movements_count);
+	ft_printf("%d movement(s)\n", game_instance->game_data.movements_count);
 	return (NO_ERROR);
 }
 

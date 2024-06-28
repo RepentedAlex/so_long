@@ -40,10 +40,6 @@ t_error	ft_find_exit(t_map *map, t_game_positions *game_pos)
 			{
 				game_pos->exit_x = j;
 				game_pos->exit_y = i;
-				printf("Exit is located on [y]%d, [x]%d\n", \
-				game_pos->exit_y, game_pos->exit_x);
-				printf("Is this a 'E'-> %c ?\n", \
-				map->map[game_pos->exit_y][game_pos->exit_x]);
 				return (NO_ERROR);
 			}
 			j++;

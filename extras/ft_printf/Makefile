@@ -48,7 +48,7 @@ all:		$(NAME)
 
 $(NAME):	$(OBJ)
 			@make -C $(LIBFT)
-			@cp $(LIBFT)/libft.a .
+			@mv $(LIBFT)/libft.a .
 			@mv libft.a $(NAME)
 			@$(AR) $(NAME) $(OBJ)
 			@echo "$(GREEN)ft_printf compiled!$(DEF_COLOR)"

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   txtrs.c                                         :+:      :+:    :+:   */
+/*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apetitco <apetitco@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -69,7 +69,6 @@ void	load_player_textures(t_game_instance *gam_ins)
 
 t_error	ft_load_textures(t_game_instance *current)
 {
-	printf("Loading txtrs...\n");
 	load_player_textures(current);
 	current->txtrs.collectible = mlx_xpm_file_to_image(current->mlx_ptr, \
 	"./assets/collectible.xpm", &current->txtrs.wdth, \
@@ -88,6 +87,5 @@ t_error	ft_load_textures(t_game_instance *current)
 	&current->txtrs.hght);
 	if (ft_check_all_textures_loaded(&current->txtrs))
 		return (ERROR);
-	printf("Textures loaded!\n");
 	return (NO_ERROR);
 }

@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "so_long.h"
 
 // Summon mlx_loop_end() in order to wrap up the game correctly
